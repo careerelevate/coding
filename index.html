@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Java Interview Questions and Answers</title>
     <link rel="stylesheet" href="./css/first.css" />
 </head>
@@ -10,12 +12,12 @@
 
     <h1>Java Interview Questions and Answers</h1>
 
-    <dl><code>
+    <dl class="qa-source"><code>
         <dt>Q #1: Write a Java program to find the smallest number in an array?</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num ={9, 3, 4, 2 ,7}</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 2</dt>
         <dd>
-            <pre id="text">A: class SmallestNumberInAnArray {
+            <pre class="code-block">A: class SmallestNumberInAnArray {
     public static void main(String[] args) {
         int [] num = {9,3,4,2,7};
         int len = num.length;
@@ -34,7 +36,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num ={9, 3, 4, 2 ,7}</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 2,3,4,7,9</dt>
         <dd>
-            <pre id="text">A: class SortInteger {
+            <pre class="code-block">A: class SortInteger {
     public static void main(String[] args) {
         int[] num = {9,3,4,2,7};
         int len = num.length;
@@ -58,7 +60,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : My name is abc</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: yM eman si cba</dt>
         <dd>
-            <pre>A #1: class ReverseString {
+            <pre class="code-block">A #1: class ReverseString {
     public static void main(String[] args) {
         String value ="My name is abc";
         String [] split = value.split(" ");
@@ -72,7 +74,7 @@
         </dd>
 
         <dd>
-            <pre>A #2: class ReverseString {
+            <pre class="code-block">A #2: class ReverseString {
     public static void main(String[] args) {
         String value ="My name is abc";
         String [] split = value.split(" ");
@@ -92,7 +94,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "101010";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: ones - 3, zeros - 3</dt>
         <dd>
-            <pre>A : class CountNumberOfOnesZeros {
+            <pre class="code-block">A : class CountNumberOfOnesZeros {
     private static int ones;
     private static int zeros;
     public static void main(String[] args) {
@@ -119,7 +121,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input &nbsp;#2: nums = [3,2,4], target = 6</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output #2: [1,2]</dt>
         <dd>
-            <pre>A : class ArrayOfTwoIndex{
+            <pre class="code-block">A : class ArrayOfTwoIndex{
     public static int[] indexOf(int [] nums, int target){
         int len = nums.length;
         for(int i=0;i&lt;len;i++){
@@ -144,7 +146,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [1,2,5]</dt>
         <dd>
-            <pre>A : import java.util.*;
+            <pre class="code-block">A : import java.util.*;
     import java.util.stream.Collectors;
     class RemoveDuplicateNumbers {
         public static void main(String[] args) {
@@ -160,7 +162,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [1,2,5]</dt>
         <dd>
-            <pre>A : import java.util.*;
+            <pre class="code-block">A : import java.util.*;
     import java.util.stream.Collectors;
     class RemoveDuplicateNumbers {
         public static void main(String[] args) {
@@ -179,7 +181,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [1,2,5]</dt>
         <dd>
-            <pre>A : class RemoveDuplicateNumbers {
+            <pre class="code-block">A : class RemoveDuplicateNumbers {
     public static void main(String [] args){
         int[] nums = {1, 2, 2, 3, 4, 5};
         int[] temp = new int[nums.length];
@@ -209,7 +211,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : String value = "apple";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: elppa</dt>
         <dd>
-            <pre>A : class ReverseTheString{     
+            <pre class="code-block">A : class ReverseTheString{     
     public static void main(String[] args) {
         String value ="apple";
         for(int i=value.length()-1;i>=0;i--){
@@ -223,7 +225,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num = {0,1,0,3,12};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 1,3,12,0,0</dt>
         <dd>
-            <pre>A : import java.util.*;
+            <pre class="code-block">A : import java.util.*;
     import java.util.stream.Collectors;
     class MoveAllZerosToEndOfArray {
         public static void main(String[] args) {
@@ -245,7 +247,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : String value = "madam";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: String is palindrome</dt>
         <dd>
-            <pre>A : class StringPalindrom {
+            <pre class="code-block">A : class StringPalindrom {
     public static void main(String[] args) {
         String value = "madam";
         int length=value.length();
@@ -265,7 +267,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int value = "151";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: Integer is palindrome</dt>
         <dd>
-            <pre>A : class IntegerPalindrom {
+            <pre class="code-block">A : class IntegerPalindrom {
     public static void main(String[] args) {
         int num = 151;
         int actualValue=0;
@@ -284,7 +286,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "AABBCABCGG";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: A:2 B:2 C:1 A:1 B:1 C:1 G:2</dt>
         <dd>
-            <pre>A : class CountDuplicateCharInString {
+            <pre class="code-block">A : class CountDuplicateCharInString {
     public static void main(String[] args) {
         String str = "AABBCABCGG";
         char [] ch = str.toCharArray();
@@ -312,7 +314,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "apple";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: aple</dt>
         <dd>
-            <pre>A : class RemoveDuplicateString {
+            <pre class="code-block">A : class RemoveDuplicateString {
     public static void main(String[] args) {
         String value = "apple";
         char[] ch = value.toCharArray();
@@ -338,7 +340,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num = {3,2,5,1,6};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 2</dt>
         <dd>
-            <pre>A : class SecondLargestArray {
+            <pre class="code-block">A : class SecondLargestArray {
     public static void main(String[] args) {
         int temp = 0;
         for (int i = 0; i &lt; num.length; i++) {
@@ -359,7 +361,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int num = 456;</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 654</dt>
         <dd>
-            <pre>A : class ReverseInteger {
+            <pre class="code-block">A : class ReverseInteger {
     public static void main(String[] args) {
         int num = 456;
         int temp=0;
@@ -376,7 +378,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "This this is is done by Saket Saket is Saket";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: this-2, is-3, done-1, by-1, Saket-3</dt>
         <dd>
-            <pre>A : class NumberOfWordsInString {
+            <pre class="code-block">A : class NumberOfWordsInString {
     public static void main(String[] args) {
         String str = "This this is is done by Saket Saket is Saket";
         String[] split = str.split(" ");
@@ -398,7 +400,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : 1,2,3,4,6,7,8</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 5</dt>
         <dd>
-            <pre>A : class MissingSequenceNumber {
+            <pre class="code-block">A : class MissingSequenceNumber {
     public static void main(String[] args) {
         int [] num ={1,2,3,4,6,7,8};
         int j=1;
@@ -422,7 +424,7 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : s= "abc", indices=[0,1,2]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: abc</dt>
         <dd>
-            <pre>A : class ShufflingString {
+            <pre class="code-block">A : class ShufflingString {
     public static shuffleString(String s, int [] indices){
         Map&lt;Integer, Character> map = new LinkedHashMap<>();
         for(int i=0;i&lt;indices.length;i++){
@@ -451,21 +453,91 @@
     </dl>
 </body>
 <script>
+    function highlightCodeBlock(codeBlock) {
+        var escapedText = codeBlock.textContent
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
 
-    function doLoad() {
-        var textElement = document.getElementById("text");
-        console.log(textElement);
-        var text = textElement.innerText;
-
-        var replaceText = text.replace(/'<'/g, '&lt;');
-        replaceText = replaceText
+        var highlightedText = escapedText
             .replace(/\bint\b/g, '<span class="keywords-text">int</span>')
-            .replace(/\bString\b/g, '<span class="keywords-text">String</span>')
-            ;
-        textElement.innerHTML = replaceText;
+            .replace(/\bString\b/g, '<span class="keywords-text">String</span>');
+
+        codeBlock.innerHTML = highlightedText;
     }
 
-    window.onload = doLoad;
+    function createQuestionItem(item) {
+        var details = document.createElement("details");
+        details.className = "qa-item";
+
+        var summary = document.createElement("summary");
+        summary.className = "qa-summary";
+        summary.innerHTML = item.question;
+        details.appendChild(summary);
+
+        if (item.meta.length > 0) {
+            var metaList = document.createElement("div");
+            metaList.className = "qa-meta";
+
+            item.meta.forEach(function (line) {
+                var metaLine = document.createElement("p");
+                metaLine.className = "qa-meta-line";
+                metaLine.innerHTML = line;
+                metaList.appendChild(metaLine);
+            });
+
+            details.appendChild(metaList);
+        }
+
+        item.answers.forEach(function (answerNode) {
+            details.appendChild(answerNode);
+        });
+
+        return details;
+    }
+
+    function buildQuestionAccordion() {
+        var source = document.querySelector(".qa-source");
+        var contentRoot = source.querySelector("code") || source;
+        var nodes = Array.from(contentRoot.children);
+        var questionItems = [];
+        var currentItem = null;
+
+        nodes.forEach(function (node) {
+            if (node.tagName === "DT") {
+                var text = node.textContent.trim();
+                if (text.startsWith("Q")) {
+                    currentItem = {
+                        question: node.innerHTML,
+                        meta: [],
+                        answers: []
+                    };
+                    questionItems.push(currentItem);
+                } else if (currentItem) {
+                    currentItem.meta.push(node.innerHTML);
+                }
+                return;
+            }
+
+            if (node.tagName === "DD" && currentItem) {
+                currentItem.answers.push(node.cloneNode(true));
+            }
+        });
+
+        var container = document.createElement("section");
+        container.className = "qa-list";
+
+        questionItems.forEach(function (item) {
+            container.appendChild(createQuestionItem(item));
+        });
+
+        source.replaceWith(container);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        buildQuestionAccordion();
+        var codeBlocks = document.querySelectorAll(".code-block");
+        codeBlocks.forEach(highlightCodeBlock);
+    });
 </script>
 
 </html>
