@@ -9,10 +9,37 @@
 </head>
 
 <body>
+    <main class="page-shell">
+        <section class="hero">
+            <p class="eyebrow">Java Interview Reference</p>
+            <h1>Java Interview Questions and Answers</h1>
+            <p class="hero-copy">
+                A focused collection of common Java interview prompts with sample solutions, organized for quick review.
+                Expand any question to inspect inputs, expected outputs, and the proposed answer.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-label">Coverage</span>
+                    <strong class="stat-value" id="questionCount">0 Questions</strong>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Format</span>
+                    <strong class="stat-value">Expandable Answers</strong>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Use Case</span>
+                    <strong class="stat-value">Interview Preparation</strong>
+                </div>
+            </div>
+        </section>
 
-    <h1>Java Interview Questions and Answers</h1>
+        <section class="content-panel">
+            <div class="section-heading">
+                <h2>Question Bank</h2>
+                <p>Review each prompt one at a time and expand the answer only when needed.</p>
+            </div>
 
-    <dl class="qa-source"><code>
+            <dl class="qa-source"><code>
         <dt>Q #1: Write a Java program to find the smallest number in an array?</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num ={9, 3, 4, 2 ,7}</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 2</dt>
@@ -450,9 +477,10 @@
 
 
         </code>
-    </dl>
-</body>
-<script>
+            </dl>
+        </section>
+    </main>
+    <script>
     function highlightCodeBlock(codeBlock) {
         var escapedText = codeBlock.textContent
             .replace(/</g, "&lt;")
@@ -471,7 +499,9 @@
 
         var summary = document.createElement("summary");
         summary.className = "qa-summary";
-        summary.innerHTML = item.question;
+        summary.innerHTML =
+            '<span class="qa-summary-text">' + item.question + '</span>' +
+            '<span class="qa-toggle-label">Show Answer</span>';
         details.appendChild(summary);
 
         if (item.meta.length > 0) {
@@ -530,6 +560,11 @@
             container.appendChild(createQuestionItem(item));
         });
 
+        var questionCount = document.getElementById("questionCount");
+        if (questionCount) {
+            questionCount.textContent = questionItems.length + " Questions";
+        }
+
         source.replaceWith(container);
     }
 
@@ -538,6 +573,5 @@
         var codeBlocks = document.querySelectorAll(".code-block");
         codeBlocks.forEach(highlightCodeBlock);
     });
-</script>
-
+    </script>
 </html>
