@@ -51,7 +51,9 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num ={9, 3, 4, 2 ,7}</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 2</dt>
         <dd>
-            <pre class="code-block">A: class SmallestNumberInAnArray {
+            <pre class="code-block">A: Walkthrough: Start with the first array value as the current minimum. Scan the array, replace the minimum whenever a smaller value is found, then print the final minimum.
+
+class SmallestNumberInAnArray {
     public static void main(String[] args) {
         int [] num = {9,3,4,2,7};
         int len = num.length;
@@ -70,7 +72,9 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num ={9, 3, 4, 2 ,7}</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 2,3,4,7,9</dt>
         <dd>
-            <pre class="code-block">A: class SortInteger {
+            <pre class="code-block">A: Walkthrough: For each array position, compare its value with every value to its right. Swap whenever a smaller value is found; after all passes, print the values in ascending order.
+
+class SortInteger {
     public static void main(String[] args) {
         int[] num = {9,3,4,2,7};
         int len = num.length;
@@ -94,7 +98,9 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : My name is abc</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: yM eman si cba</dt>
         <dd>
-            <pre class="code-block">A #1: class ReverseString {
+            <pre class="code-block">A #1: Walkthrough: Split the input at spaces, reverse each word with a StringBuilder, and print the reversed words in their original order.
+
+class ReverseString {
     public static void main(String[] args) {
         String value ="My name is abc";
         String [] split = value.split(" ");
@@ -108,7 +114,9 @@
         </dd>
 
         <dd>
-            <pre class="code-block">A #2: class ReverseString {
+            <pre class="code-block">A #2: Walkthrough: Split the input into words, turn each word into a character array, and print its characters from the last index to the first. A space is printed after each reversed word.
+
+class ReverseString {
     public static void main(String[] args) {
         String value ="My name is abc";
         String [] split = value.split(" ");
@@ -128,7 +136,9 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "101010";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: ones - 3, zeros - 3</dt>
         <dd>
-            <pre class="code-block">A : class CountNumberOfOnesZeros {
+            <pre class="code-block">A: Walkthrough: Convert the string to characters and inspect each digit. Increment the zero or one counter as appropriate, then print both totals; this expects a string containing only 0s and 1s.
+
+class CountNumberOfOnesZeros {
     private static int ones;
     private static int zeros;
     public static void main(String[] args) {
@@ -155,7 +165,9 @@
         <dt>&nbsp;&nbsp;&nbsp;Input &nbsp;#2: nums = [3,2,4], target = 6</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output #2: [1,2]</dt>
         <dd>
-            <pre class="code-block">A : class ArrayOfTwoIndex{
+            <pre class="code-block">A: Walkthrough: Try every pair of distinct indices with nested loops. Return the first pair whose values sum to the target; return [-1, -1] if no pair matches.
+
+class ArrayOfTwoIndex{
     public static int[] indexOf(int [] nums, int target){
         int len = nums.length;
         for(int i=0;i&lt;len;i++){
@@ -179,7 +191,9 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [1, 2, 3, 5]</dt>
         <dd>
-            <pre class="code-block">A: import java.util.Arrays;
+            <pre class="code-block">A: Walkthrough: Because the array is sorted, duplicates are adjacent. Copy each new value into the next position in the same array, track the unique count, then print only the compacted prefix.
+
+import java.util.Arrays;
 class RemoveDuplicatesFromSortedArray {
     public static void main(String[] args) {
         int[] nums = {1, 2, 2, 2, 3, 5};
@@ -198,7 +212,9 @@ class RemoveDuplicatesFromSortedArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [1, 2, 3, 5]</dt>
         <dd>
-            <pre class="code-block">A: import java.util.LinkedHashSet;
+            <pre class="code-block">A: Walkthrough: Add each value to a LinkedHashSet. The set removes duplicates while retaining the order in which each distinct value first appeared.
+
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 class RemoveDuplicatesWithCollection {
@@ -217,7 +233,9 @@ class RemoveDuplicatesWithCollection {
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={3,1,3,2,1};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [3, 1, 2]</dt>
         <dd>
-            <pre class="code-block">A: import java.util.Arrays;
+            <pre class="code-block">A: Walkthrough: Keep distinct values in a separate array. For each input value, scan the values already collected and append it only if it has not appeared before; print the populated prefix.
+
+import java.util.Arrays;
 class RemoveDuplicatesFromUnsortedArray {
     public static void main(String[] args) {
         int[] nums = {3, 1, 3, 2, 1};
@@ -245,7 +263,9 @@ class RemoveDuplicatesFromUnsortedArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : String value = "apple";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: elppa</dt>
         <dd>
-            <pre class="code-block">A : class ReverseTheString{     
+            <pre class="code-block">A: Walkthrough: Start at the last character and move backward to index zero, printing each character to produce the reversed string.
+
+class ReverseTheString{
     public static void main(String[] args) {
         String value ="apple";
         for(int i=value.length()-1;i>=0;i--){
@@ -259,7 +279,9 @@ class RemoveDuplicatesFromUnsortedArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num = {0,1,0,3,12};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [1, 3, 12, 0, 0]</dt>
         <dd>
-            <pre class="code-block">A: import java.util.Arrays;
+            <pre class="code-block">A: Walkthrough: Copy every nonzero value forward while preserving its order. Once they are gathered at the beginning, fill the remaining array positions with zeros.
+
+import java.util.Arrays;
 class MoveAllZerosToEndOfArray {
     public static void main(String[] args) {
         int[] num = {0, 1, 0, 3, 12};
@@ -281,7 +303,9 @@ class MoveAllZerosToEndOfArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : String value = "madam";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: String is palindrome</dt>
         <dd>
-            <pre class="code-block">A : class StringPalindrom {
+            <pre class="code-block">A: Walkthrough: Compare each character with its mirrored character at the opposite end of the string. If any pair differs, mark the string as not a palindrome; otherwise it reads the same in both directions.
+
+class StringPalindrom {
     public static void main(String[] args) {
         String value = "madam";
         int length=value.length();
@@ -301,7 +325,9 @@ class MoveAllZerosToEndOfArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : int value = 151;</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: Integer is palindrome</dt>
         <dd>
-            <pre class="code-block">A : class IntegerPalindrom {
+            <pre class="code-block">A: Walkthrough: Build the reversed number one digit at a time using the remainder (% 10), then remove the last digit from the input by dividing by 10. Compare the reversed value with the original; this example uses a non-negative integer.
+
+class IntegerPalindrom {
     public static void main(String[] args) {
         int num = 151;
         int actualValue=0;
@@ -320,7 +346,9 @@ class MoveAllZerosToEndOfArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "AABBCABCGG";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: A:2 B:2 C:1 A:1 B:1 C:1 G:2</dt>
         <dd>
-            <pre class="code-block">A: class CountConsecutiveCharacters {
+            <pre class="code-block">A: Walkthrough: At each index, remember the current character and count how many identical characters appear consecutively. Print that character and run length, then continue at the next run.
+
+class CountConsecutiveCharacters {
     public static void main(String[] args) {
         String str = "AABBCABCGG";
         int index = 0;
@@ -341,7 +369,9 @@ class MoveAllZerosToEndOfArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "apple";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: aple</dt>
         <dd>
-            <pre class="code-block">A: class RemoveDuplicateCharacters {
+            <pre class="code-block">A: Walkthrough: Scan the string from left to right and append a character only if it is not already in the result. This removes later duplicates while preserving each character’s first occurrence.
+
+class RemoveDuplicateCharacters {
     public static void main(String[] args) {
         String value = "apple";
         StringBuilder result = new StringBuilder();
@@ -360,7 +390,9 @@ class MoveAllZerosToEndOfArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num = {3,2,5,1,6};</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 5</dt>
         <dd>
-            <pre class="code-block">A: class SecondLargestArray {
+            <pre class="code-block">A: Walkthrough: Track the largest and second-largest distinct values in one pass. When a new maximum appears, move the old maximum into second place; otherwise update second place if the value is distinct and larger.
+
+class SecondLargestArray {
     public static void main(String[] args) {
         int[] num = {3, 2, 5, 1, 6};
         Integer largest = null;
@@ -388,7 +420,9 @@ class MoveAllZerosToEndOfArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : int num = 456;</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 654</dt>
         <dd>
-            <pre class="code-block">A : class ReverseInteger {
+            <pre class="code-block">A: Walkthrough: Repeatedly take the last digit with % 10 and append it to the reversed number, then discard that digit by dividing by 10. The example assumes a non-negative integer.
+
+class ReverseInteger {
     public static void main(String[] args) {
         int num = 456;
         int temp=0;
@@ -405,7 +439,9 @@ class MoveAllZerosToEndOfArray {
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "This this is is done by Saket Saket is Saket";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: {This=1, this=1, is=3, done=1, by=1, Saket=3}</dt>
         <dd>
-            <pre class="code-block">A: import java.util.LinkedHashMap;
+            <pre class="code-block">A: Walkthrough: Trim the input and split it into words on whitespace. For each word, increment its count in a LinkedHashMap, which keeps first-seen order and treats differently cased words separately.
+
+import java.util.LinkedHashMap;
 
 class NumberOfWordsInString {
     public static void main(String[] args) {
@@ -424,7 +460,9 @@ class NumberOfWordsInString {
         <dt>&nbsp;&nbsp;&nbsp;Input : 1,2,3,4,6,7,8</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 5</dt>
         <dd>
-            <pre class="code-block">A : class MissingSequenceNumber {
+            <pre class="code-block">A: Walkthrough: Compare each number with the next one. When the difference is not 1, print the value immediately after the current number and stop.
+
+class MissingSequenceNumber {
     public static void main(String[] args) {
         int [] num ={1,2,3,4,6,7,8};
         for (int i = 0; i &lt; num.length - 1; i++) {
@@ -446,7 +484,9 @@ class NumberOfWordsInString {
         <dt>&nbsp;&nbsp;&nbsp;Input : s= "abc", indices=[0,1,2]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: abc</dt>
         <dd>
-            <pre class="code-block">A: class ShufflingString {
+            <pre class="code-block">A: Walkthrough: Create a character array for the output. For each input position i, place that character at indices[i], then convert the filled array back into a string.
+
+class ShufflingString {
     public static String shuffleString(String s, int[] indices) {
         char[] shuffled = new char[s.length()];
         for (int i = 0; i &lt; s.length(); i++) {
@@ -462,6 +502,71 @@ class NumberOfWordsInString {
     }
 }</pre>
         </dd>
+
+        <dt data-difficulty="easy">Q #20: Replace the first character with the last character in every word.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: "hello world Java"</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output: "oellh dorlw aavJ"</dt>
+        <dd>
+            <pre class="code-block">A: Walkthrough: Split the string into words, then swap the first and last characters of each word. Words with one character remain unchanged, and spaces between words are preserved.
+
+class ReplaceFirstAndLastCharacter {
+    public static String replaceFirstAndLast(String text) {
+        String[] words = text.split(" ", -1);
+        StringBuilder result = new StringBuilder();
+
+        for (int wordIndex = 0; wordIndex &lt; words.length; wordIndex++) {
+            char[] characters = words[wordIndex].toCharArray();
+            if (characters.length &gt; 1) {
+                char first = characters[0];
+                characters[0] = characters[characters.length - 1];
+                characters[characters.length - 1] = first;
+            }
+
+            if (wordIndex &gt; 0) {
+                result.append(' ');
+            }
+            result.append(characters);
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String input = "hello world Java";
+        System.out.println(replaceFirstAndLast(input));
+    }
+}</pre>
+        </dd>
+
+        <dt data-difficulty="easy">Q #21: Convert the first character of every word to uppercase.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: "java programming is fun"</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output: "Java Programming Is Fun"</dt>
+        <dd>
+            <pre class="code-block">A: Walkthrough: Walk through the string once. Convert a character to uppercase when it is the first character or follows a space; append every other character unchanged so the original spaces are retained.
+
+class CapitalizeFirstCharacterOfEveryWord {
+    public static String capitalizeWords(String text) {
+        StringBuilder result = new StringBuilder(text.length());
+
+        for (int i = 0; i &lt; text.length(); i++) {
+            char current = text.charAt(i);
+            if (i == 0 || text.charAt(i - 1) == ' ') {
+                result.append(Character.toUpperCase(current));
+            } else {
+                result.append(current);
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String input = "java programming is fun";
+        System.out.println(capitalizeWords(input));
+    }
+}</pre>
+        </dd>
+
 
         </code>
             </dl>
