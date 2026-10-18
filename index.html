@@ -528,8 +528,86 @@ class NumberOfWordsInString {
         item.answers.forEach(function (answerNode) {
             answerContent.appendChild(answerNode);
         });
+
+        var tryItDetails = document.createElement("details");
+        tryItDetails.className = "try-it-yourself";
+
+        var tryItSummary = document.createElement("summary");
+        tryItSummary.className = "try-it-summary";
+        tryItSummary.innerHTML =
+            '<span class="try-it-label">Try it yourself</span>';
+        tryItDetails.appendChild(tryItSummary);
+
+        var tryItSection = document.createElement("div");
+        tryItSection.className = "try-it-yourself";
+
+        var tryItNote = document.createElement("p");
+        tryItNote.textContent =
+            "The editor starts blank with autocomplete disabled and syntax highlighting enabled. Choose Java, Python, C, or C++ in the editor. OneCompiler AI can help explain errors in the result panel. Running code or requesting AI help sends it to OneCompiler; don't enter secrets.";
+        tryItSection.appendChild(tryItNote);
+
+        var codeEditor = document.createElement("iframe");
+        codeEditor.className = "online-code-editor";
+        codeEditor.title = "OneCompiler online code editor";
+        codeEditor.loading = "lazy";
+        codeEditor.referrerPolicy = "no-referrer";
+        codeEditor.dataset.src =
+            "https://onecompiler.com/embed/java?hideTitle=true&hideNew=true&hideLanguageSelection=false&disableAutoComplete=true&listenToEvents=true&showAi=true&theme=light";
+        tryItSection.appendChild(codeEditor);
+        tryItDetails.appendChild(tryItSection);
+
+        var editorLanguage = "java";
+        var editorFiles = {
+            java: "Main.java",
+            python: "main.py",
+            c: "main.c",
+            cpp: "main.cpp"
+        };
+
+        function clearEditor(language) {
+            codeEditor.contentWindow.postMessage(
+                {
+                    eventType: "populateCode",
+                    language: language,
+                    files: [{ name: editorFiles[language], content: "" }],
+                    stdin: ""
+                },
+                "https://onecompiler.com"
+            );
+        }
+
+        codeEditor.addEventListener("load", function () {
+            if (!codeEditor.hasAttribute("src")) {
+                return;
+            }
+
+            window.setTimeout(function () {
+                clearEditor(editorLanguage);
+            }, 250);
+        });
+
+        window.addEventListener("message", function (event) {
+            if (
+                event.origin !== "https://onecompiler.com" ||
+                event.source !== codeEditor.contentWindow ||
+                !event.data ||
+                event.data.action !== "change" ||
+                !Object.prototype.hasOwnProperty.call(
+                    editorFiles,
+                    event.data.language
+                ) ||
+                event.data.language === editorLanguage
+            ) {
+                return;
+            }
+
+            editorLanguage = event.data.language;
+            clearEditor(editorLanguage);
+        });
+
         answerDetails.appendChild(answerContent);
         details.appendChild(answerDetails);
+        details.appendChild(tryItDetails);
 
         details.addEventListener("toggle", function () {
             details.querySelector(".qa-toggle-label").textContent =
@@ -538,6 +616,13 @@ class NumberOfWordsInString {
         answerDetails.addEventListener("toggle", function () {
             answerSummary.querySelector(".qa-answer-label").textContent =
                 answerDetails.open ? "Hide Answer" : "Show Answer";
+        });
+        tryItDetails.addEventListener("toggle", function () {
+            tryItSummary.querySelector(".try-it-label").textContent =
+                tryItDetails.open ? "Hide Try it yourself" : "Try it yourself";
+            if (tryItDetails.open && !codeEditor.hasAttribute("src")) {
+                codeEditor.src = codeEditor.dataset.src;
+            }
         });
 
         return details;
