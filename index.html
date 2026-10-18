@@ -15,7 +15,7 @@
             <h1>Java Interview Questions and Answers</h1>
             <p class="hero-copy">
                 A focused collection of common Java interview prompts with sample solutions, organized for quick review.
-                Expand any question to inspect inputs, expected outputs, and the proposed answer.
+                Review each question's examples, then reveal its answer when you're ready.
             </p>
             <div class="hero-stats">
                 <div class="stat-card">
@@ -36,7 +36,7 @@
         <section class="content-panel">
             <div class="section-heading">
                 <h2>Question Bank</h2>
-                <p>Review each prompt one at a time and expand the answer only when needed.</p>
+                <p>Use the examples to think through each question before revealing its answer.</p>
             </div>
 
             <dl class="qa-source"><code>
@@ -83,7 +83,7 @@
     }</pre>
         </dd>
 
-        <dt>Q #3: Write a java program to reverse the string?</dt>
+        <dt>Q #3: Write a Java program to reverse each word in a string?</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : My name is abc</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: yM eman si cba</dt>
         <dd>
@@ -126,7 +126,7 @@
     private static int zeros;
     public static void main(String[] args) {
         String value="101010";
-        char [] ch = value.toCharArray();        
+        char [] ch = value.toCharArray();
         for(int i=0;i&lt;ch.length;i++){
             int num = Integer.parseInt(String.valueOf(ch[i]));
             if(num == 0) {
@@ -144,7 +144,7 @@
         <dt>Q #5: Write a java program for an array of integers, find two index such that they add up to a specific
             target number?</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input &nbsp;#1: nums = [2,7,11,15], target = 9</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Output #1: [0,1]</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output #1: [0, 1]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input &nbsp;#2: nums = [3,2,4], target = 6</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output #2: [1,2]</dt>
         <dd>
@@ -162,76 +162,76 @@
 }
     public static void main(String[] args) {
         int [] nums = {2,7,11,15};
-        int target =22;
-        for(int i : indexOf(nums,target))
-            System.out.print(i+" ");    
-        }
-    }</pre>
-        </dd>
-
-        <dt>Q #6: Write a java program to remove duplicate numbers from the sorted array?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Output: [1,2,5]</dt>
-        <dd>
-            <pre class="code-block">A : import java.util.*;
-    import java.util.stream.Collectors;
-    class RemoveDuplicateNumbers {
-        public static void main(String[] args) {
-            int [] nums ={1,2,2,2,3,5};
-            Set<Integer> sets = Arrays.stream(nums).boxed().collect(Collectors.toSet());
-            for(String i : sets)
-                System.out.print(i);
-            }
-        }</pre>
-        </dd>
-
-        <dt>Q #7: Write a java program to remove duplicate numbers from the sorted array using inbuild funstions?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Output: [1,2,5]</dt>
-        <dd>
-            <pre class="code-block">A : import java.util.*;
-    import java.util.stream.Collectors;
-    class RemoveDuplicateNumbers {
-        public static void main(String[] args) {
-            int [] nums ={1,2,2,2,3,5};
-            Set<Integer> sets = Arrays.stream(nums).boxed().collect(Collectors.toSet());
-            for(String i : sets)
-                System.out.print(i);
-            }
-        }</pre>
-        </dd>
-
-        <dt>Q #8: Write a java program to remove duplicate numbers from the sorted array <b style="color : red;">
-                without
-            </b> using inbuild
-            funstions?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Output: [1,2,5]</dt>
-        <dd>
-            <pre class="code-block">A : class RemoveDuplicateNumbers {
-    public static void main(String [] args){
-        int[] nums = {1, 2, 2, 3, 4, 5};
-        int[] temp = new int[nums.length];
-        int j = 1, k = 0;
-        int target = 0, count = 0;
-        for (int i = 0; i&lt;nums.length; i++) {
-            if (j == nums.length) {
-                temp[k++] = nums[i];
-            } else {
-                target = nums[j++];
-            }        
-            if (nums[i]&lt;target) {
-                temp[k++] = nums[i];
-            } else if (nums[i] == target) {
-                count++;
-            }       
-        }
-        for (int i = 0; i&lt;=temp.length - count; i++) {
-            System.out.print(temp[i]);
-        }
+        int target = 9;
+        System.out.println(java.util.Arrays.toString(indexOf(nums, target)));
     }
-}
-            </pre>
+}</pre>
+        </dd>
+
+        <dt>Q #6: Remove duplicates from a sorted array without using collection classes?</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output: [1, 2, 3, 5]</dt>
+        <dd>
+            <pre class="code-block">A: import java.util.Arrays;
+class RemoveDuplicatesFromSortedArray {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 2, 2, 3, 5};
+        int uniqueCount = 0;
+        for (int num : nums) {
+            if (uniqueCount == 0 || nums[uniqueCount - 1] != num) {
+                nums[uniqueCount++] = num;
+            }
+        }
+        System.out.println(Arrays.toString(Arrays.copyOf(nums, uniqueCount)));
+    }
+}</pre>
+        </dd>
+
+        <dt>Q #7: Remove duplicates from a sorted array using a collection?</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output: [1, 2, 3, 5]</dt>
+        <dd>
+            <pre class="code-block">A: import java.util.LinkedHashSet;
+import java.util.Set;
+
+class RemoveDuplicatesWithCollection {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 2, 2, 3, 5};
+        Set&lt;Integer&gt; uniqueNumbers = new LinkedHashSet&lt;&gt;();
+        for (int num : nums) {
+            uniqueNumbers.add(num);
+        }
+        System.out.println(uniqueNumbers);
+    }
+}</pre>
+        </dd>
+
+        <dt>Q #8: Remove duplicates from an unsorted array without using collection classes?</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={3,1,3,2,1};</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output: [3, 1, 2]</dt>
+        <dd>
+            <pre class="code-block">A: import java.util.Arrays;
+class RemoveDuplicatesFromUnsortedArray {
+    public static void main(String[] args) {
+        int[] nums = {3, 1, 3, 2, 1};
+        int[] uniqueNumbers = new int[nums.length];
+        int uniqueCount = 0;
+
+        for (int num : nums) {
+            boolean alreadyPresent = false;
+            for (int i = 0; i &lt; uniqueCount; i++) {
+                if (uniqueNumbers[i] == num) {
+                    alreadyPresent = true;
+                    break;
+                }
+            }
+            if (!alreadyPresent) {
+                uniqueNumbers[uniqueCount++] = num;
+            }
+        }
+        System.out.println(Arrays.toString(Arrays.copyOf(uniqueNumbers, uniqueCount)));
+    }
+}</pre>
         </dd>
 
         <dt>Q #9: Write a java program to reverse the string?</dt>
@@ -250,24 +250,24 @@
 
         <dt>Q #10: Write a java program to move all the zeros to end of the array?</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num = {0,1,0,3,12};</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Output: 1,3,12,0,0</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output: [1, 3, 12, 0, 0]</dt>
         <dd>
-            <pre class="code-block">A : import java.util.*;
-    import java.util.stream.Collectors;
-    class MoveAllZerosToEndOfArray {
-        public static void main(String[] args) {
-            int [] num = {0,1,0,3,12};
-            int [] result = new int[num.length];            
-            int j=0;
-            for(int i=0;i&lt;num.length;i++){
-                if(num[i]>0){
-                    result[j++]=num[i];
-                }
+            <pre class="code-block">A: import java.util.Arrays;
+class MoveAllZerosToEndOfArray {
+    public static void main(String[] args) {
+        int[] num = {0, 1, 0, 3, 12};
+        int nextNonZero = 0;
+        for (int value : num) {
+            if (value != 0) {
+                num[nextNonZero++] = value;
             }
-            List<Integer> integerList = Arrays.stream(result).boxed().collect(Collectors.toList());
-            System.out.println(integerList);
         }
-    }</pre>
+        while (nextNonZero &lt; num.length) {
+            num[nextNonZero++] = 0;
+        }
+        System.out.println(Arrays.toString(num));
+    }
+}</pre>
         </dd>
 
         <dt>Q #11: Write a java program whether string is palindrome?</dt>
@@ -291,7 +291,7 @@
         </dd>
 
         <dt>Q #12: Write a java program whether number is palindrome?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int value = "151";</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input : int value = 151;</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: Integer is palindrome</dt>
         <dd>
             <pre class="code-block">A : class IntegerPalindrom {
@@ -309,82 +309,75 @@
 }</pre>
         </dd>
 
-        <dt>Q #13: Write a java program where,</dt>
+        <dt>Q #13: Count each run of consecutive repeated characters in a string.</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "AABBCABCGG";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: A:2 B:2 C:1 A:1 B:1 C:1 G:2</dt>
         <dd>
-            <pre class="code-block">A : class CountDuplicateCharInString {
+            <pre class="code-block">A: class CountConsecutiveCharacters {
     public static void main(String[] args) {
         String str = "AABBCABCGG";
-        char [] ch = str.toCharArray();
-        int j=1;
-        int count=1;
-        for(int i=0;i&lt;ch.length;i++){
-            if(ch[j]==ch[i]){
+        int index = 0;
+        while (index &lt; str.length()) {
+            char current = str.charAt(index);
+            int count = 0;
+            while (index &lt; str.length() &amp;&amp; str.charAt(index) == current) {
                 count++;
-                System.out.println(ch[i]+":"+count);
-                count--;
-                j+=2;
-                i+=1;
-            }else{
-                System.out.println(ch[i]+":"+count);
-                System.out.println(ch[j]+":"+count);
-                j+=2;
-                i+=1;
+                index++;
             }
+            System.out.print(current + ":" + count + " ");
         }
     }
 }</pre>
         </dd>
 
-        <dt>Q #14: Write a java program to remove the duplicate from String?</dt>
+        <dt>Q #14: Remove duplicate characters from a string while preserving their first occurrence?</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "apple";</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: aple</dt>
         <dd>
-            <pre class="code-block">A : class RemoveDuplicateString {
+            <pre class="code-block">A: class RemoveDuplicateCharacters {
     public static void main(String[] args) {
         String value = "apple";
-        char[] ch = value.toCharArray();
-        char[] temp = new char [ch.length];
-        int j=1,k=0,count=0;
-        for(int i=0;i&lt;ch.length;i++){
-            if(i==ch.length-1){
-                temp[k++]=ch[i];
-            }else if(ch[i]==ch[j++]){
-                count++;
-            }else{
-                temp[k++]=ch[i];
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i &lt; value.length(); i++) {
+            char current = value.charAt(i);
+            if (result.indexOf(String.valueOf(current)) == -1) {
+                result.append(current);
             }
         }
-        for(int i=0;i&lt;ch.length-count;i++){
-            System.out.print(temp[i]);
-        }
+        System.out.println(result);
     }
 }</pre>
         </dd>
 
-        <dt>Q #14: Write a java program to print the second largest number in an array list(not a sorted array)?</dt>
+        <dt>Q #15: Find the second-largest distinct number in an unsorted array.</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : int [] num = {3,2,5,1,6};</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Output: 2</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output: 5</dt>
         <dd>
-            <pre class="code-block">A : class SecondLargestArray {
+            <pre class="code-block">A: class SecondLargestArray {
     public static void main(String[] args) {
-        int temp = 0;
-        for (int i = 0; i &lt; num.length; i++) {
-            for (int j = i + 1; j &lt; num.length; j++) {
-                if (num[i] > num[j]) {
-                    temp = num[i];
-                    num[i] = num[j];
-                    num[j] = temp;
-                }
+        int[] num = {3, 2, 5, 1, 6};
+        Integer largest = null;
+        Integer secondLargest = null;
+
+        for (int value : num) {
+            if (largest == null || value &gt; largest) {
+                secondLargest = largest;
+                largest = value;
+            } else if (value != largest
+                    &amp;&amp; (secondLargest == null || value &gt; secondLargest)) {
+                secondLargest = value;
             }
         }
-        System.out.println(num[1]);
+        if (secondLargest == null) {
+            System.out.println("No second-largest distinct value");
+        } else {
+            System.out.println(secondLargest);
+        }
     }
 }</pre>
         </dd>
 
-        <dt>Q #15: Write a java program to reverse the integer?</dt>
+        <dt>Q #16: Reverse an integer.</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : int num = 456;</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 654</dt>
         <dd>
@@ -401,48 +394,43 @@
 }</pre>
         </dd>
 
-        <dt>Q #16: Write a java program to find number of words in a string?</dt>
+        <dt>Q #17: Count the occurrences of each word in a string (case-sensitive).</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : String str = "This this is is done by Saket Saket is Saket";</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Output: this-2, is-3, done-1, by-1, Saket-3</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output: {This=1, this=1, is=3, done=1, by=1, Saket=3}</dt>
         <dd>
-            <pre class="code-block">A : class NumberOfWordsInString {
+            <pre class="code-block">A: import java.util.LinkedHashMap;
+
+class NumberOfWordsInString {
     public static void main(String[] args) {
         String str = "This this is is done by Saket Saket is Saket";
-        String[] split = str.split(" ");
+        String[] split = str.trim().split("\\s+");
         LinkedHashMap<String, Integer> hashMap = new LinkedHashMap<>();
-        for (int i = 0; i &lt; split.length; i++) {
-            if (hashMap.containsKey(split[i])) {
-                int count = hashMap.get(split[i]);
-                hashMap.put(split[i], ++count);
-            } else {
-                hashMap.put(split[i], 1);
-            }
+        for (String word : split) {
+            hashMap.put(word, hashMap.getOrDefault(word, 0) + 1);
         }
         System.out.println(hashMap);
     }
 }</pre>
         </dd>
 
-        <dt>Q #17: Write a java program to find the missing sequence number?</dt>
+        <dt>Q #18: Find the missing number in a consecutive increasing sequence.</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : 1,2,3,4,6,7,8</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 5</dt>
         <dd>
             <pre class="code-block">A : class MissingSequenceNumber {
     public static void main(String[] args) {
         int [] num ={1,2,3,4,6,7,8};
-        int j=1;
-        for(int i=0;i&lt;num.length-1;i++){
-            if(num[j++]-num[i]!=1){
-                System.out.println(j);
+        for (int i = 0; i &lt; num.length - 1; i++) {
+            if (num[i + 1] - num[i] != 1) {
+                System.out.println(num[i] + 1);
+                break;
             }
         }
     }
 }</pre>
         </dd>
 
-        <dt>Q #18: Write a java program to find You are given a string s and an integer array indices of the same length. 
-            The string s will be shuffled such that the character at the ith position moves to indices[i] in the shuffled 
-            string?</dt>
+        <dt>Q #19: Shuffle a string so the character at position i moves to indices[i].</dt>
         <dt>Example :1</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : s= "codeleet", indices=[4,5,6,7,0,2,1,3]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: leetcode</dt>
@@ -451,30 +439,22 @@
         <dt>&nbsp;&nbsp;&nbsp;Input : s= "abc", indices=[0,1,2]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: abc</dt>
         <dd>
-            <pre class="code-block">A : class ShufflingString {
-    public static shuffleString(String s, int [] indices){
-        Map&lt;Integer, Character> map = new LinkedHashMap<>();
-        for(int i=0;i&lt;indices.length;i++){
-            map.put(i,s.chartAt(i));
+            <pre class="code-block">A: class ShufflingString {
+    public static String shuffleString(String s, int[] indices) {
+        char[] shuffled = new char[s.length()];
+        for (int i = 0; i &lt; s.length(); i++) {
+            shuffled[indices[i]] = s.charAt(i);
         }
-        StringBuilder sb = new StringBuilder();
-        for(int i=0;i&lt;indices.length;i++){
-            sb.append(map.get(i));
-        }
-
-        return sb.toString();
+        return new String(shuffled);
     }
+
     public static void main(String[] args) {
         String s = "codeleet";
-        int [] num ={4,5,6,7,0,2,1,3};
-        shuffleString(s,num);
+        int[] indices = {4, 5, 6, 7, 0, 2, 1, 3};
+        System.out.println(shuffleString(s, indices));
     }
 }</pre>
         </dd>
-
-        <dt>Q: What is the highest mountain in the world?</dt>
-        <dd>A: Mount Everest is the highest mountain in the world.</dd>
-
 
         </code>
             </dl>
@@ -501,12 +481,17 @@
         summary.className = "qa-summary";
         summary.innerHTML =
             '<span class="qa-summary-text">' + item.question + '</span>' +
-            '<span class="qa-toggle-label">Show Answer</span>';
+            '<span class="qa-toggle-label">Show Examples</span>';
         details.appendChild(summary);
 
         if (item.meta.length > 0) {
             var metaList = document.createElement("div");
             metaList.className = "qa-meta";
+
+            var examplesHeading = document.createElement("h3");
+            examplesHeading.className = "qa-examples-heading";
+            examplesHeading.textContent = "Examples";
+            metaList.appendChild(examplesHeading);
 
             item.meta.forEach(function (line) {
                 var metaLine = document.createElement("p");
@@ -518,8 +503,30 @@
             details.appendChild(metaList);
         }
 
+        var answerDetails = document.createElement("details");
+        answerDetails.className = "qa-answer-toggle";
+
+        var answerSummary = document.createElement("summary");
+        answerSummary.className = "qa-answer-summary";
+        answerSummary.innerHTML =
+            '<span class="qa-answer-label">Show Answer</span>';
+        answerDetails.appendChild(answerSummary);
+
+        var answerContent = document.createElement("div");
+        answerContent.className = "qa-answer-content";
         item.answers.forEach(function (answerNode) {
-            details.appendChild(answerNode);
+            answerContent.appendChild(answerNode);
+        });
+        answerDetails.appendChild(answerContent);
+        details.appendChild(answerDetails);
+
+        details.addEventListener("toggle", function () {
+            details.querySelector(".qa-toggle-label").textContent =
+                details.open ? "Hide Examples" : "Show Examples";
+        });
+        answerDetails.addEventListener("toggle", function () {
+            answerSummary.querySelector(".qa-answer-label").textContent =
+                answerDetails.open ? "Hide Answer" : "Show Answer";
         });
 
         return details;

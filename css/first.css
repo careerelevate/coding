@@ -160,18 +160,16 @@ h1 {
     color: #ffffff;
 }
 
-.qa-item[open] .qa-toggle-label::after {
-    content: " / Hide";
-}
-
-.qa-item:not([open]) .qa-toggle-label::after {
-    content: " / Open";
-}
-
 .qa-meta {
     border-top: 1px solid #e1e8f0;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     padding-top: 14px;
+}
+
+.qa-examples-heading {
+    color: #26364c;
+    font-size: 0.95rem;
+    margin: 0 0 8px;
 }
 
 .qa-meta-line {
@@ -181,6 +179,36 @@ h1 {
     color: #3a4c65;
     margin: 8px 0;
     padding: 10px 12px;
+}
+
+.qa-answer-toggle {
+    border-top: 1px solid #e1e8f0;
+    padding-top: 14px;
+}
+
+.qa-answer-summary {
+    cursor: pointer;
+    display: inline-flex;
+    list-style: none;
+}
+
+.qa-answer-summary::-webkit-details-marker {
+    display: none;
+}
+
+.qa-answer-label {
+    background: #214d91;
+    border: 1px solid #214d91;
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    white-space: nowrap;
+}
+
+.qa-answer-content dd {
+    margin: 0;
 }
 
 .code-block {
