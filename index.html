@@ -592,8 +592,80 @@ class CapitalizeFirstCharacterOfEveryWord {
 }</pre>
         </dd>
 
+    <dt data-difficulty="easy">Q #22: Rotate a number to the left by two digits.</dt>
+    <dt>&nbsp;&nbsp;&nbsp;Input: 123456</dt>
+    <dt>&nbsp;&nbsp;&nbsp;Output: 345612</dt>
+    <dd>
+        <pre class="code-block">A: Walkthrough: Count the digits, then extract them from right to left into an integer array so they are stored in their original order. Print from index two to the end, followed by the first two digits. This handles nonnegative integers and rotates by two positions, or fewer when the number has fewer than two digits.
 
-        </code>
+class RotateNumberLeft {
+    public static void main(String[] args) {
+    int number = 123456;
+    int temp = number;
+    int digitCount = 0;
+
+    do {
+        digitCount++;
+        temp /= 10;
+    } while (temp &gt; 0);
+
+    int[] digits = new int[digitCount];
+    temp = number;
+    for (int i = digitCount - 1; i &gt;= 0; i--) {
+        digits[i] = temp % 10;
+        temp /= 10;
+    }
+
+    int rotation = 2 % digitCount;
+    for (int i = rotation; i &lt; digitCount; i++) {
+        System.out.print(digits[i]);
+    }
+    for (int i = 0; i &lt; rotation; i++) {
+        System.out.print(digits[i]);
+    }
+    System.out.println();
+    }
+}</pre>
+    </dd>
+
+    <dt data-difficulty="easy">Q #23: Rotate a number to the right by two digits.</dt>
+    <dt>&nbsp;&nbsp;&nbsp;Input: 123456</dt>
+    <dt>&nbsp;&nbsp;&nbsp;Output: 561234</dt>
+    <dd>
+        <pre class="code-block">A: Walkthrough: Count the digits, then extract them from right to left into an integer array so they are stored in their original order. Print the final two digits first, followed by the remaining digits. This handles nonnegative integers and rotates by two positions, or fewer when the number has fewer than two digits.
+
+class RotateNumberRight {
+    public static void main(String[] args) {
+    int number = 123456;
+    int temp = number;
+    int digitCount = 0;
+
+    do {
+        digitCount++;
+        temp /= 10;
+    } while (temp &gt; 0);
+
+    int[] digits = new int[digitCount];
+    temp = number;
+    for (int i = digitCount - 1; i &gt;= 0; i--) {
+        digits[i] = temp % 10;
+        temp /= 10;
+    }
+
+    int rotation = 2 % digitCount;
+    int splitIndex = digitCount - rotation;
+    for (int i = splitIndex; i &lt; digitCount; i++) {
+        System.out.print(digits[i]);
+    }
+    for (int i = 0; i &lt; splitIndex; i++) {
+        System.out.print(digits[i]);
+    }
+    System.out.println();
+    }
+}</pre>
+    </dd>
+
+    </code>
             </dl>
         </section>
     </main>

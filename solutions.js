@@ -118,7 +118,38 @@ for i, char in enumerate(text):
         result += char.upper()
     else:
         result += char
-print(result)` }
+print(result)` },
+        { walkthrough: "Count the digits, then store them from right to left in an array to restore their original order. Print from index two onward, then print the first two digits; the rotation is limited to the number's length.", code: `number = 123456
+temp = number
+digit_count = 1
+while temp >= 10:
+    digit_count += 1
+    temp //= 10
+
+digits = [0] * digit_count
+temp = number
+for i in range(digit_count - 1, -1, -1):
+    digits[i] = temp % 10
+    temp //= 10
+
+rotation = 2 % digit_count
+print("".join(str(digit) for digit in digits[rotation:] + digits[:rotation]))` },
+        { walkthrough: "Count the digits, then store them from right to left in an array to restore their original order. Print the final two digits first, followed by the rest; the rotation is limited to the number's length.", code: `number = 123456
+temp = number
+digit_count = 1
+while temp >= 10:
+    digit_count += 1
+    temp //= 10
+
+digits = [0] * digit_count
+temp = number
+for i in range(digit_count - 1, -1, -1):
+    digits[i] = temp % 10
+    temp //= 10
+
+rotation = 2 % digit_count
+split_index = digit_count - rotation
+print("".join(str(digit) for digit in digits[split_index:] + digits[:split_index]))` }
     ],
     c: [
         { walkthrough: "Initialize the minimum to the first array value, scan the array, and update it whenever a smaller value appears.", code: `#include <stdio.h>
@@ -331,6 +362,32 @@ int main(void) {
         if (i == 0 || text[i - 1] == ' ') text[i] = (char)toupper((unsigned char)text[i]);
     puts(text);
     return 0;
+}` },
+        { walkthrough: "Count the digits and extract them into an integer array from right to left. Print from index two to the end, then the first two digits; this rotates by two positions or fewer for shorter numbers.", code: `#include <stdio.h>
+int main(void) {
+    int number = 123456, temp = number, digitCount = 0;
+    do { digitCount++; temp /= 10; } while (temp > 0);
+    int digits[10];
+    temp = number;
+    for (int i = digitCount - 1; i >= 0; i--) { digits[i] = temp % 10; temp /= 10; }
+    int rotation = 2 % digitCount;
+    for (int i = rotation; i < digitCount; i++) printf("%d", digits[i]);
+    for (int i = 0; i < rotation; i++) printf("%d", digits[i]);
+    putchar('\\n');
+    return 0;
+}` },
+        { walkthrough: "Count the digits and extract them into an integer array from right to left. Print the final two digits first, then the remaining digits; this rotates by two positions or fewer for shorter numbers.", code: `#include <stdio.h>
+int main(void) {
+    int number = 123456, temp = number, digitCount = 0;
+    do { digitCount++; temp /= 10; } while (temp > 0);
+    int digits[10];
+    temp = number;
+    for (int i = digitCount - 1; i >= 0; i--) { digits[i] = temp % 10; temp /= 10; }
+    int rotation = 2 % digitCount, splitIndex = digitCount - rotation;
+    for (int i = splitIndex; i < digitCount; i++) printf("%d", digits[i]);
+    for (int i = 0; i < splitIndex; i++) printf("%d", digits[i]);
+    putchar('\\n');
+    return 0;
 }` }
     ],
     cpp: [
@@ -540,6 +597,32 @@ int main() {
     for (int i = 0; i < (int)text.size(); i++)
         if (i == 0 || text[i - 1] == ' ') text[i] = (char)toupper((unsigned char)text[i]);
     cout << text << '\\n';
+}` },
+        { walkthrough: "Count the digits and extract them into an integer array from right to left. Print from index two to the end, then the first two digits; this rotates by two positions or fewer for shorter numbers.", code: `#include <iostream>
+using namespace std;
+int main() {
+    int number = 123456, temp = number, digitCount = 0;
+    do { digitCount++; temp /= 10; } while (temp > 0);
+    int digits[10];
+    temp = number;
+    for (int i = digitCount - 1; i >= 0; i--) { digits[i] = temp % 10; temp /= 10; }
+    int rotation = 2 % digitCount;
+    for (int i = rotation; i < digitCount; i++) cout << digits[i];
+    for (int i = 0; i < rotation; i++) cout << digits[i];
+    cout << '\\n';
+}` },
+        { walkthrough: "Count the digits and extract them into an integer array from right to left. Print the final two digits first, then the remaining digits; this rotates by two positions or fewer for shorter numbers.", code: `#include <iostream>
+using namespace std;
+int main() {
+    int number = 123456, temp = number, digitCount = 0;
+    do { digitCount++; temp /= 10; } while (temp > 0);
+    int digits[10];
+    temp = number;
+    for (int i = digitCount - 1; i >= 0; i--) { digits[i] = temp % 10; temp /= 10; }
+    int rotation = 2 % digitCount, splitIndex = digitCount - rotation;
+    for (int i = splitIndex; i < digitCount; i++) cout << digits[i];
+    for (int i = 0; i < splitIndex; i++) cout << digits[i];
+    cout << '\\n';
 }` }
     ]
 };
