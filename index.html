@@ -589,6 +589,7 @@ class CapitalizeFirstCharacterOfEveryWord {
     function setTheme(theme) {
         var isDark = theme === "dark";
         document.documentElement.dataset.theme = isDark ? "dark" : "light";
+        updateCodeEditorTheme(isDark ? "dark" : "light");
 
         var themeToggle = document.getElementById("themeToggle");
         themeToggle.setAttribute("aria-pressed", String(isDark));
@@ -598,6 +599,19 @@ class CapitalizeFirstCharacterOfEveryWord {
         );
         themeToggle.querySelector(".theme-toggle-label").textContent =
             isDark ? "Light mode" : "Dark mode";
+    }
+
+    function updateCodeEditorTheme(theme) {
+        document.querySelectorAll(".online-code-editor").forEach(function (editor) {
+            var editorUrl = new URL(editor.dataset.src);
+            editorUrl.searchParams.set("theme", theme);
+            var themedUrl = editorUrl.toString();
+            editor.dataset.src = themedUrl;
+
+            if (editor.hasAttribute("src") && editor.src !== themedUrl) {
+                editor.src = themedUrl;
+            }
+        });
     }
 
     function initializeThemeToggle() {
@@ -613,6 +627,18 @@ class CapitalizeFirstCharacterOfEveryWord {
         themeToggle.addEventListener("click", function () {
             var nextTheme =
                 document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+            var openEditors = document.querySelectorAll(
+                ".online-code-editor[src]"
+            );
+            if (
+                openEditors.length > 0 &&
+                !window.confirm(
+                    "Changing the theme will reload the code editor. Any code currently in the editor may be cleared. Continue?"
+                )
+            ) {
+                return;
+            }
+
             setTheme(nextTheme);
             try {
                 localStorage.setItem("preferred-theme", nextTheme);
@@ -859,6 +885,12 @@ class CapitalizeFirstCharacterOfEveryWord {
         codeEditor.referrerPolicy = "no-referrer";
         codeEditor.dataset.src =
             "https://onecompiler.com/embed/java?hideTitle=true&hideNew=true&hideLanguageSelection=false&disableAutoComplete=true&listenToEvents=true&showAi=true&theme=light";
+        var initialEditorUrl = new URL(codeEditor.dataset.src);
+        initialEditorUrl.searchParams.set(
+            "theme",
+            document.documentElement.dataset.theme || "light"
+        );
+        codeEditor.dataset.src = initialEditorUrl.toString();
         tryItSection.appendChild(codeEditor);
         tryItDetails.appendChild(tryItSection);
 
