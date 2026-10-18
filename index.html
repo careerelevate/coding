@@ -16,10 +16,23 @@
     <main class="page-shell">
         <section class="hero">
             <h1>Coding Interview Practice &amp; Solutions</h1>
-            <p class="hero-copy">
-                Explore interview questions with examples and walkthroughs in Java, Python, C, or C++. Filter by difficulty,
-                copy solutions, and run your own code with AI-powered error help.
-            </p>
+            <div class="hero-intro-row">
+                <p class="hero-copy">
+                    Explore interview questions with examples and walkthroughs in Java, Python, C, or C++. Filter by difficulty,
+                    copy solutions, and run your own code with AI-powered error help.
+                </p>
+                <div class="feedback-action">
+                    <a class="feedback-button" id="feedbackLink" hidden target="_blank" rel="noopener noreferrer">
+                        Give feedback
+                    </a>
+                    <button class="feedback-button" id="feedbackUnavailable" type="button" disabled>
+                        Give feedback
+                    </button>
+                    <p class="feedback-status" id="feedbackStatus" role="status">
+                        Feedback submissions will be enabled when a Google Form linked to the response Sheet is connected.
+                    </p>
+                </div>
+            </div>
             <div class="hero-stats">
                 <div class="stat-card">
                     <span class="stat-label">Coverage</span>
@@ -586,6 +599,43 @@ class CapitalizeFirstCharacterOfEveryWord {
     </main>
     <script src="./solutions.js"></script>
     <script>
+    var feedbackFormUrl = "";
+
+    function configureFeedbackLink() {
+        var feedbackLink = document.getElementById("feedbackLink");
+        var unavailableButton = document.getElementById("feedbackUnavailable");
+        var feedbackStatus = document.getElementById("feedbackStatus");
+        if (!feedbackFormUrl) {
+            return;
+        }
+
+        var formUrl;
+        try {
+            formUrl = new URL(feedbackFormUrl);
+            if (
+                formUrl.protocol !== "https:" ||
+                !(
+                    formUrl.hostname === "docs.google.com" &&
+                    formUrl.pathname.indexOf("/forms/") === 0
+                ) &&
+                formUrl.hostname !== "forms.gle"
+            ) {
+                throw new Error("Feedback URL must be a public Google Forms responder link.");
+            }
+        } catch (error) {
+            feedbackStatus.textContent =
+                "The feedback form link is invalid. Configure a public Google Forms responder URL.";
+            console.error("Unable to configure the feedback form link.", error);
+            return;
+        }
+
+        feedbackLink.href = formUrl.toString();
+        feedbackLink.hidden = false;
+        unavailableButton.hidden = true;
+        feedbackStatus.textContent =
+            "Your feedback opens a Google Form and is saved to its linked response Sheet.";
+    }
+
     function setTheme(theme) {
         var isDark = theme === "dark";
         document.documentElement.dataset.theme = isDark ? "dark" : "light";
@@ -1052,6 +1102,7 @@ class CapitalizeFirstCharacterOfEveryWord {
     }
 
     document.addEventListener("DOMContentLoaded", function () {
+        configureFeedbackLink();
         initializeThemeToggle();
         buildQuestionAccordion();
         var codeBlocks = document.querySelectorAll(".code-block");

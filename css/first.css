@@ -81,6 +81,64 @@ h1 {
     max-width: 680px;
 }
 
+.hero-intro-row {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 28px;
+    justify-content: space-between;
+}
+
+.hero-intro-row .hero-copy {
+    flex: 1 1 520px;
+}
+
+.feedback-action {
+    flex: 0 1 290px;
+}
+
+.feedback-button {
+    align-items: center;
+    background: #214d91;
+    border: 1px solid #214d91;
+    border-radius: 999px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    justify-content: center;
+    padding: 9px 16px;
+    text-decoration: none;
+}
+
+.feedback-button:hover:not(:disabled) {
+    background: #193c72;
+}
+
+.feedback-button:focus-visible {
+    outline: 2px solid #6c9de1;
+    outline-offset: 3px;
+}
+
+.feedback-button:disabled {
+    background: #526781;
+    border-color: #526781;
+    cursor: not-allowed;
+    opacity: 0.82;
+}
+
+.feedback-button[hidden] {
+    display: none;
+}
+
+.feedback-status {
+    color: #58677d;
+    font-size: 0.8rem;
+    margin: 7px 0 0;
+}
+
 .hero-stats {
     display: grid;
     gap: 14px;
@@ -493,6 +551,7 @@ body,
 }
 
 [data-theme="dark"] .hero-copy,
+[data-theme="dark"] .feedback-status,
 [data-theme="dark"] .stat-label,
 [data-theme="dark"] .section-heading p,
 [data-theme="dark"] .difficulty-filter,
@@ -537,6 +596,12 @@ body,
 [data-theme="dark"] .copy-code-button {
     background: #1e293b;
     border-color: #475569;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .feedback-button:disabled {
+    background: #475569;
+    border-color: #64748b;
     color: #e2e8f0;
 }
 
