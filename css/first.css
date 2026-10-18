@@ -100,6 +100,38 @@ h1 {
     margin: 0;
 }
 
+.difficulty-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 22px;
+}
+
+.difficulty-filter {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    color: #34445a;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 8px 16px;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.difficulty-filter:hover,
+.difficulty-filter:focus-visible {
+    border-color: #214d91;
+    outline: none;
+}
+
+.difficulty-filter.is-active {
+    background: #214d91;
+    border-color: #214d91;
+    color: #ffffff;
+}
+
 .qa-list {
     display: grid;
     gap: 16px;
@@ -127,9 +159,9 @@ h1 {
 .qa-summary {
     align-items: center;
     cursor: pointer;
-    display: flex;
-    gap: 16px;
-    justify-content: space-between;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: minmax(0, 1fr) 88px 140px;
     list-style: none;
     padding: 20px 0 16px;
 }
@@ -141,7 +173,50 @@ h1 {
 .qa-summary-text {
     font-size: 1.05rem;
     font-weight: 700;
-    max-width: 760px;
+}
+
+.qa-toggle-label {
+    justify-self: end;
+}
+
+.difficulty-badge {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    box-sizing: border-box;
+    font-size: 0.76rem;
+    font-weight: 700;
+    justify-self: center;
+    padding: 5px 10px;
+    text-align: center;
+    white-space: nowrap;
+    width: 84px;
+}
+
+.difficulty-easy {
+    background: #e8f7ed;
+    border-color: #b8e2c4;
+    color: #176b35;
+}
+
+.difficulty-medium {
+    background: #fff6d9;
+    border-color: #f0dc91;
+    color: #795900;
+}
+
+.difficulty-hard {
+    background: #fde8e7;
+    border-color: #efb9b5;
+    color: #a12620;
+}
+
+.difficulty-empty {
+    background: #f4f7fb;
+    border-radius: 12px;
+    color: #56657c;
+    margin: 0;
+    padding: 16px;
+    text-align: center;
 }
 
 .qa-toggle-label {
@@ -241,11 +316,14 @@ h1 {
     }
 
     .qa-summary {
-        align-items: flex-start;
-        flex-direction: column;
+        grid-template-columns: 1fr auto;
+    }
+
+    .qa-summary-text {
+        grid-column: 1 / -1;
     }
 
     .qa-toggle-label {
-        align-self: flex-start;
+        justify-self: end;
     }
 }
