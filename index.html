@@ -9,13 +9,16 @@
 </head>
 
 <body>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-toggle-indicator" aria-hidden="true"></span>
+        <span class="theme-toggle-label">Dark mode</span>
+    </button>
     <main class="page-shell">
         <section class="hero">
-            <p class="eyebrow">Java Interview Reference</p>
-            <h1>Java Interview Questions and Answers</h1>
+            <h1>Coding Interview Practice &amp; Solutions</h1>
             <p class="hero-copy">
-                Practice Java interview questions with examples, expandable answers, and difficulty filters. Write and run
-                code in Java, Python, C, or C++, then use OneCompiler AI to help explain errors.
+                Explore interview questions with examples and walkthroughs in Java, Python, C, or C++. Filter by difficulty,
+                copy solutions, and run your own code with AI-powered error help.
             </p>
             <div class="hero-stats">
                 <div class="stat-card">
@@ -36,7 +39,17 @@
         <section class="content-panel">
             <div class="section-heading">
                 <h2>Question Bank</h2>
-                <p>Start with All or filter by difficulty. Open examples, reveal an answer, or try your own code.</p>
+                <p>Choose a language for the walkthroughs and solutions, then filter by difficulty. The example input values stay the same; output formatting follows the selected language.</p>
+            </div>
+
+            <div class="language-selector">
+                <label for="questionLanguage">Programming language</label>
+                <select id="questionLanguage">
+                    <option value="java">Java</option>
+                    <option value="python">Python</option>
+                    <option value="c">C</option>
+                    <option value="cpp">C++</option>
+                </select>
             </div>
 
             <div class="difficulty-filters" role="group" aria-label="Filter questions by difficulty">
@@ -47,8 +60,8 @@
             </div>
 
             <dl class="qa-source"><code>
-        <dt data-difficulty="easy">Q #1: Write a Java program to find the smallest number in an array?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] num ={9, 3, 4, 2 ,7}</dt>
+        <dt data-difficulty="easy">Q #1: Find the smallest number in an array.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: [9, 3, 4, 2, 7]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 2</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Start with the first array value as the current minimum. Scan the array, replace the minimum whenever a smaller value is found, then print the final minimum.
@@ -68,8 +81,8 @@ class SmallestNumberInAnArray {
 }</pre>
         </dd>
 
-        <dt data-difficulty="medium">Q #2: Sort the Integer array without using any Java inbuild functions?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] num ={9, 3, 4, 2 ,7}</dt>
+        <dt data-difficulty="medium">Q #2: Sort an integer array without using a built-in sorting function.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: [9, 3, 4, 2, 7]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 2,3,4,7,9</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: For each array position, compare its value with every value to its right. Swap whenever a smaller value is found; after all passes, print the values in ascending order.
@@ -94,7 +107,7 @@ class SortInteger {
     }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #3: Write a Java program to reverse each word in a string?</dt>
+        <dt data-difficulty="easy">Q #3: Reverse each word in a string.</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input : My name is abc</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: yM eman si cba</dt>
         <dd>
@@ -132,9 +145,9 @@ class ReverseString {
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #4: Write a java program to count 1 and 0 in a given string?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : String str = "101010";</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Output: ones - 3, zeros - 3</dt>
+        <dt data-difficulty="easy">Q #4: Count the zeros and ones in a binary string.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: "101010"</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Output: zeros - 3, ones - 3</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Convert the string to characters and inspect each digit. Increment the zero or one counter as appropriate, then print both totals; this expects a string containing only 0s and 1s.
 
@@ -158,8 +171,7 @@ class CountNumberOfOnesZeros {
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #5: Write a java program for an array of integers, find two index such that they add up to a specific
-            target number?</dt>
+        <dt data-difficulty="easy">Q #5: Find two indexes whose values add up to a target number.</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input &nbsp;#1: nums = [2,7,11,15], target = 9</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output #1: [0, 1]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Input &nbsp;#2: nums = [3,2,4], target = 6</dt>
@@ -187,8 +199,8 @@ class ArrayOfTwoIndex{
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #6: Remove duplicates from a sorted array without using collection classes?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
+        <dt data-difficulty="easy">Q #6: Remove duplicates from a sorted array in place.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: [1, 2, 2, 2, 3, 5]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [1, 2, 3, 5]</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Because the array is sorted, duplicates are adjacent. Copy each new value into the next position in the same array, track the unique count, then print only the compacted prefix.
@@ -208,8 +220,8 @@ class RemoveDuplicatesFromSortedArray {
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #7: Remove duplicates from a sorted array using a collection?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={1,2,2,2,3,5};</dt>
+        <dt data-difficulty="easy">Q #7: Remove duplicates from a sorted array while preserving order.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: [1, 2, 2, 2, 3, 5]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [1, 2, 3, 5]</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Add each value to a LinkedHashSet. The set removes duplicates while retaining the order in which each distinct value first appeared.
@@ -229,8 +241,8 @@ class RemoveDuplicatesWithCollection {
 }</pre>
         </dd>
 
-        <dt data-difficulty="medium">Q #8: Remove duplicates from an unsorted array without using collection classes?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] nums ={3,1,3,2,1};</dt>
+        <dt data-difficulty="medium">Q #8: Remove duplicates from an unsorted array without using a set.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: [3, 1, 3, 2, 1]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [3, 1, 2]</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Keep distinct values in a separate array. For each input value, scan the values already collected and append it only if it has not appeared before; print the populated prefix.
@@ -259,8 +271,8 @@ class RemoveDuplicatesFromUnsortedArray {
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #9: Write a java program to reverse the string?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : String value = "apple";</dt>
+        <dt data-difficulty="easy">Q #9: Reverse a string.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: "apple"</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: elppa</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Start at the last character and move backward to index zero, printing each character to produce the reversed string.
@@ -275,8 +287,8 @@ class ReverseTheString{
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #10: Write a java program to move all the zeros to end of the array?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] num = {0,1,0,3,12};</dt>
+        <dt data-difficulty="easy">Q #10: Move all zeros to the end of an array while preserving the order of the other values.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: [0, 1, 0, 3, 12]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: [1, 3, 12, 0, 0]</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Copy every nonzero value forward while preserving its order. Once they are gathered at the beginning, fill the remaining array positions with zeros.
@@ -299,8 +311,8 @@ class MoveAllZerosToEndOfArray {
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #11: Write a java program whether string is palindrome?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : String value = "madam";</dt>
+        <dt data-difficulty="easy">Q #11: Determine whether a string is a palindrome.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: "madam"</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: String is palindrome</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Compare each character with its mirrored character at the opposite end of the string. If any pair differs, mark the string as not a palindrome; otherwise it reads the same in both directions.
@@ -321,8 +333,8 @@ class StringPalindrom {
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #12: Write a java program whether number is palindrome?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int value = 151;</dt>
+        <dt data-difficulty="easy">Q #12: Determine whether a non-negative integer is a palindrome.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: 151</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: Integer is palindrome</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Build the reversed number one digit at a time using the remainder (% 10), then remove the last digit from the input by dividing by 10. Compare the reversed value with the original; this example uses a non-negative integer.
@@ -343,7 +355,7 @@ class IntegerPalindrom {
         </dd>
 
         <dt data-difficulty="medium">Q #13: Count each run of consecutive repeated characters in a string.</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : String str = "AABBCABCGG";</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: "AABBCABCGG"</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: A:2 B:2 C:1 A:1 B:1 C:1 G:2</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: At each index, remember the current character and count how many identical characters appear consecutively. Print that character and run length, then continue at the next run.
@@ -365,8 +377,8 @@ class CountConsecutiveCharacters {
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #14: Remove duplicate characters from a string while preserving their first occurrence?</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : String str = "apple";</dt>
+        <dt data-difficulty="easy">Q #14: Remove duplicate characters from a string while preserving their first occurrence.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: "apple"</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: aple</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Scan the string from left to right and append a character only if it is not already in the result. This removes later duplicates while preserving each character’s first occurrence.
@@ -387,7 +399,7 @@ class RemoveDuplicateCharacters {
         </dd>
 
         <dt data-difficulty="medium">Q #15: Find the second-largest distinct number in an unsorted array.</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int [] num = {3,2,5,1,6};</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: [3, 2, 5, 1, 6]</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 5</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Track the largest and second-largest distinct values in one pass. When a new maximum appears, move the old maximum into second place; otherwise update second place if the value is distinct and larger.
@@ -416,8 +428,8 @@ class SecondLargestArray {
 }</pre>
         </dd>
 
-        <dt data-difficulty="easy">Q #16: Reverse an integer.</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : int num = 456;</dt>
+        <dt data-difficulty="easy">Q #16: Reverse a non-negative integer.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: 456</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: 654</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Repeatedly take the last digit with % 10 and append it to the reversed number, then discard that digit by dividing by 10. The example assumes a non-negative integer.
@@ -435,8 +447,8 @@ class ReverseInteger {
 }</pre>
         </dd>
 
-        <dt data-difficulty="medium">Q #17: Count the occurrences of each word in a string (case-sensitive).</dt>
-        <dt>&nbsp;&nbsp;&nbsp;Input : String str = "This this is is done by Saket Saket is Saket";</dt>
+        <dt data-difficulty="medium">Q #17: Count the occurrences of each word in a string, distinguishing uppercase and lowercase.</dt>
+        <dt>&nbsp;&nbsp;&nbsp;Input: "This this is is done by Saket Saket is Saket"</dt>
         <dt>&nbsp;&nbsp;&nbsp;Output: {This=1, this=1, is=3, done=1, by=1, Saket=3}</dt>
         <dd>
             <pre class="code-block">A: Walkthrough: Trim the input and split it into words on whitespace. For each word, increment its count in a LinkedHashMap, which keeps first-seen order and treats differently cased words separately.
@@ -572,7 +584,44 @@ class CapitalizeFirstCharacterOfEveryWord {
             </dl>
         </section>
     </main>
+    <script src="./solutions.js"></script>
     <script>
+    function setTheme(theme) {
+        var isDark = theme === "dark";
+        document.documentElement.dataset.theme = isDark ? "dark" : "light";
+
+        var themeToggle = document.getElementById("themeToggle");
+        themeToggle.setAttribute("aria-pressed", String(isDark));
+        themeToggle.setAttribute(
+            "aria-label",
+            isDark ? "Switch to light mode" : "Switch to dark mode"
+        );
+        themeToggle.querySelector(".theme-toggle-label").textContent =
+            isDark ? "Light mode" : "Dark mode";
+    }
+
+    function initializeThemeToggle() {
+        var themeToggle = document.getElementById("themeToggle");
+        try {
+            var savedTheme = localStorage.getItem("preferred-theme");
+            setTheme(savedTheme === "dark" ? "dark" : "light");
+        } catch (error) {
+            setTheme("light");
+            console.error("Unable to read the saved color theme.", error);
+        }
+
+        themeToggle.addEventListener("click", function () {
+            var nextTheme =
+                document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+            setTheme(nextTheme);
+            try {
+                localStorage.setItem("preferred-theme", nextTheme);
+            } catch (error) {
+                console.error("Unable to save the selected color theme.", error);
+            }
+        });
+    }
+
     function highlightCodeBlock(codeBlock) {
         var escapedText = codeBlock.textContent
             .replace(/</g, "&lt;")
@@ -583,6 +632,127 @@ class CapitalizeFirstCharacterOfEveryWord {
             .replace(/\bString\b/g, '<span class="keywords-text">String</span>');
 
         codeBlock.innerHTML = highlightedText;
+    }
+
+    function makeVariableNamesReadable(code, language) {
+        var names = language === "python"
+            ? {
+                nums: "numbers",
+                num: "number",
+                len: "length",
+                temp: "temporary_value",
+                tem: "temporary_value",
+                str: "text",
+                ch: "character",
+                sb: "string_builder",
+                res: "result",
+                arr: "array",
+                cnt: "count",
+                i: "index",
+                j: "other_index",
+                n: "number_count",
+                t: "temporary_value"
+            }
+            : {
+                nums: "numbers",
+                num: "number",
+                len: "length",
+                temp: "temporaryValue",
+                tem: "temporaryValue",
+                str: "text",
+                ch: "character",
+                sb: "stringBuilder",
+                res: "result",
+                arr: "array",
+                cnt: "count",
+                i: "index",
+                j: "otherIndex",
+                n: "numberCount",
+                t: "temporaryValue"
+            };
+        var codeTokenPattern =
+            /"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|\/\/[^\r\n]*|\/\*[\s\S]*?\*\/|#[^\r\n]*|\b[A-Za-z_$][\w$]*\b/g;
+        return code.replace(codeTokenPattern, function (token) {
+            return Object.prototype.hasOwnProperty.call(names, token)
+                ? names[token]
+                : token;
+        });
+    }
+
+    async function copyCodeText(code) {
+        if (navigator.clipboard && window.isSecureContext) {
+            try {
+                await navigator.clipboard.writeText(code);
+                return;
+            } catch (clipboardError) {
+                var fallbackError = copyCodeWithSelection(code);
+                if (!fallbackError) {
+                    return;
+                }
+                throw new Error(
+                    "Clipboard access failed: " + clipboardError.message +
+                    ". Fallback copy failed: " + fallbackError.message
+                );
+            }
+        }
+
+        var error = copyCodeWithSelection(code);
+        if (error) {
+            throw error;
+        }
+    }
+
+    function copyCodeWithSelection(code) {
+        var textarea = document.createElement("textarea");
+        textarea.value = code;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            if (!document.execCommand("copy")) {
+                return new Error("The browser rejected the copy command.");
+            }
+            return null;
+        } catch (error) {
+            return error;
+        } finally {
+            textarea.remove();
+        }
+    }
+
+    function createAnswerCode(codeText, language) {
+        var codeContainer = document.createElement("div");
+        codeContainer.className = "answer-code-container";
+
+        var toolbar = document.createElement("div");
+        toolbar.className = "answer-code-toolbar";
+
+        var copyButton = document.createElement("button");
+        copyButton.className = "copy-code-button";
+        copyButton.type = "button";
+        copyButton.textContent = "Copy code";
+        copyButton.addEventListener("click", function () {
+            copyCodeText(code.textContent).then(function () {
+                copyButton.textContent = "Copied!";
+                copyButton.title = "Code copied to clipboard";
+            }).catch(function (error) {
+                copyButton.textContent = "Copy failed";
+                copyButton.title = error.message;
+                console.error("Unable to copy answer code.", error);
+            });
+        });
+        toolbar.appendChild(copyButton);
+
+        var code = document.createElement("pre");
+        code.className = "code-block";
+        code.textContent = makeVariableNamesReadable(codeText, language);
+
+        codeContainer.appendChild(toolbar);
+        codeContainer.appendChild(code);
+        return codeContainer;
     }
 
     function createQuestionItem(item) {
@@ -630,8 +800,39 @@ class CapitalizeFirstCharacterOfEveryWord {
 
         var answerContent = document.createElement("div");
         answerContent.className = "qa-answer-content";
+        var javaAnswers = document.createElement("div");
+        javaAnswers.className = "qa-language-answer";
+        javaAnswers.dataset.language = "java";
         item.answers.forEach(function (answerNode) {
-            answerContent.appendChild(answerNode);
+            var answerParts = answerNode.textContent.trim().match(
+                /^A(?:\s+#\d+)?:\s*Walkthrough:\s*([\s\S]*?)\r?\n\s*\r?\n([\s\S]*)$/
+            );
+            if (!answerParts) {
+                throw new Error("Unable to parse Java answer walkthrough and code.");
+            }
+
+            var walkthrough = document.createElement("p");
+            walkthrough.className = "answer-walkthrough";
+            walkthrough.textContent = "Walkthrough: " + answerParts[1].trim();
+
+            javaAnswers.appendChild(walkthrough);
+            javaAnswers.appendChild(createAnswerCode(answerParts[2].trim(), "java"));
+        });
+        answerContent.appendChild(javaAnswers);
+
+        ["python", "c", "cpp"].forEach(function (language) {
+            var languageAnswer = document.createElement("div");
+            languageAnswer.className = "qa-language-answer";
+            languageAnswer.dataset.language = language;
+
+            var solution = languageSolutions[language][item.questionNumber - 1];
+            var walkthrough = document.createElement("p");
+            walkthrough.className = "answer-walkthrough";
+            walkthrough.textContent = "Walkthrough: " + solution.walkthrough;
+
+            languageAnswer.appendChild(walkthrough);
+            languageAnswer.appendChild(createAnswerCode(solution.code, language));
+            answerContent.appendChild(languageAnswer);
         });
 
         var tryItDetails = document.createElement("details");
@@ -747,6 +948,7 @@ class CapitalizeFirstCharacterOfEveryWord {
                     currentItem = {
                         question: node.innerHTML,
                         difficulty: node.dataset.difficulty,
+                        questionNumber: questionItems.length + 1,
                         meta: [],
                         answers: []
                     };
@@ -770,6 +972,15 @@ class CapitalizeFirstCharacterOfEveryWord {
         });
 
         var filterButtons = document.querySelectorAll(".difficulty-filter");
+        var languageSelector = document.getElementById("questionLanguage");
+        function showSelectedLanguageAnswers() {
+            container.querySelectorAll(".qa-language-answer").forEach(function (answer) {
+                answer.hidden = answer.dataset.language !== languageSelector.value;
+            });
+        }
+        languageSelector.addEventListener("change", showSelectedLanguageAnswers);
+        showSelectedLanguageAnswers();
+
         var emptyMessage = document.createElement("p");
         emptyMessage.className = "difficulty-empty";
         emptyMessage.textContent = "No questions in this difficulty yet.";
@@ -809,6 +1020,7 @@ class CapitalizeFirstCharacterOfEveryWord {
     }
 
     document.addEventListener("DOMContentLoaded", function () {
+        initializeThemeToggle();
         buildQuestionAccordion();
         var codeBlocks = document.querySelectorAll(".code-block");
         codeBlocks.forEach(highlightCodeBlock);
