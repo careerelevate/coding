@@ -480,7 +480,7 @@ class NumberOfWordsInString {
         var summary = document.createElement("summary");
         summary.className = "qa-summary";
         summary.innerHTML =
-            '<span class="qa-summary-text">' + item.question + '</span>' +
+            '<span class="qa-summary-text">' + item.question.replace(/^Q #/, "") + '</span>' +
             '<span class="qa-toggle-label">Show Examples</span>';
         details.appendChild(summary);
 
