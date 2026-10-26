@@ -3,6 +3,10 @@ Page link - https://careerelevate.github.io/coding/
 
 The **Current Openings** card on the home page links to [current-openings.html](./current-openings.html).
 
+## Job openings
+
+Each opening is an `<article class="job-opening">` inside `#jobOpeningsList` in [current-openings.html](./current-openings.html). Add the role bucket with `data-role` (`software-developer`, `tester`, or `performance-testing`), show the matching label in the Role field, and include a `<time datetime="YYYY-MM-DD">` element with the posted date. The page sorts openings newest first and uses the `data-role` value for the filter buttons. To add a new role bucket, add a filter button with a matching `data-role-filter` value.
+
 ## Feedback form
 
 The **Give feedback** button opens a form inside the page instead of navigating to Google Forms. On submit, the email address and feedback are posted to the Google Form's `formResponse` endpoint in a hidden iframe, so the Google Form itself is never shown.

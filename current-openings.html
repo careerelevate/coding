@@ -31,33 +31,60 @@
                     <p>Explore current roles and application details.</p>
                 </div>
             </div>
-            <article class="job-opening" aria-labelledby="seniorQaTitle">
-                <div class="job-opening-heading">
-                    <div>
-                        <p class="job-opening-type">W2 / 1099</p>
-                        <h3 id="seniorQaTitle">Senior QA Engineer / QA Lead</h3>
-                        <p class="job-opening-specialty">Application, API &amp; Automation Testing</p>
+
+            <div class="job-filters" role="group" aria-label="Filter job openings by role">
+                <button class="job-filter is-active" type="button" data-role-filter="all" aria-pressed="true">All</button>
+                <button class="job-filter" type="button" data-role-filter="software-developer" aria-pressed="false">Software Developer</button>
+                <button class="job-filter" type="button" data-role-filter="tester" aria-pressed="false">Tester</button>
+                <button class="job-filter" type="button" data-role-filter="performance-testing" aria-pressed="false">Performance Testing</button>
+            </div>
+            <p class="job-filter-summary" id="jobFilterSummary" role="status">Showing 1 opening, newest first.</p>
+
+            <div class="job-openings-list" id="jobOpeningsList">
+                <article class="job-opening" data-role="tester" aria-labelledby="seniorQaTitle">
+                    <div class="job-opening-heading">
+                        <div>
+                            <p class="job-opening-type">W2 / 1099</p>
+                            <h3 id="seniorQaTitle">Senior QA Engineer / QA Lead</h3>
+                            <p class="job-opening-specialty">Application, API &amp; Automation Testing</p>
+                        </div>
                     </div>
-                    <p class="job-opening-location">Irving, TX · Onsite</p>
-                </div>
 
-                <p class="job-opening-experience"><strong>Experience:</strong> 10+ years</p>
-                <h4>Key skills</h4>
-                <ul class="job-opening-skills">
-                    <li>Application testing: functional, regression, integration, and end-to-end testing</li>
-                    <li>API testing: REST, JSON/XML, and backend validation</li>
-                    <li>Test automation: UI/API automation and automation frameworks</li>
-                    <li>SQL, defect management, and Agile/Scrum</li>
-                </ul>
+                    <div class="job-opening-meta">
+                        <p class="job-opening-role">
+                            <span class="job-opening-meta-label">Role</span>
+                            <span class="job-opening-role-value">Tester</span>
+                        </p>
+                        <p class="job-opening-posted">
+                            <span class="job-opening-meta-label">Posted</span>
+                            <time datetime="2026-10-18">October 18, 2026</time>
+                        </p>
+                        <p class="job-opening-location">
+                            <span class="job-opening-meta-label">Location</span>
+                            <span>Irving, TX · Onsite</span>
+                        </p>
+                    </div>
 
-                <p class="job-opening-application">
-                    Share your updated resume at
-                    <a href="mailto:nick@uniteditinc.com?subject=Senior%20QA%20Engineer%20%2F%20QA%20Lead%20Application&amp;body=Please%20include%20your%20visa%20status%20and%20current%20location.">
-                        nick@uniteditinc.com
-                    </a>.
-                    Please mention your visa status and current location.
-                </p>
-            </article>
+                    <p class="job-opening-experience"><strong>Experience:</strong> 10+ years</p>
+                    <h4>Key skills</h4>
+                    <ul class="job-opening-skills">
+                        <li>Application testing: functional, regression, integration, and end-to-end testing</li>
+                        <li>API testing: REST, JSON/XML, and backend validation</li>
+                        <li>Test automation: UI/API automation and automation frameworks</li>
+                        <li>SQL, defect management, and Agile/Scrum</li>
+                    </ul>
+
+                    <p class="job-opening-application">
+                        Share your updated resume at
+                        <a href="mailto:nick@uniteditinc.com?subject=Senior%20QA%20Engineer%20%2F%20QA%20Lead%20Application&amp;body=Please%20include%20your%20visa%20status%20and%20current%20location.">
+                            nick@uniteditinc.com
+                        </a>.
+                        Please mention your visa status and current location.
+                    </p>
+                </article>
+            </div>
+
+            <p class="job-filter-empty" id="jobFilterEmpty" hidden>No openings in this category yet. Check back soon.</p>
         </section>
 
         <p><a class="feedback-button" href="./index.html">Back to coding practice</a></p>
@@ -96,6 +123,68 @@
                     console.error("Unable to save the selected color theme.", error);
                 }
             });
+        }());
+    </script>
+
+    <script>
+        (function () {
+            var jobList = document.getElementById("jobOpeningsList");
+            var filterButtons = Array.prototype.slice.call(document.querySelectorAll(".job-filter"));
+            var filterSummary = document.getElementById("jobFilterSummary");
+            var filterEmpty = document.getElementById("jobFilterEmpty");
+
+            if (!jobList || !filterSummary || !filterEmpty) {
+                return;
+            }
+
+            var jobs = Array.prototype.slice.call(jobList.querySelectorAll(".job-opening"));
+
+            function getPostedTime(job) {
+                var postedDate = job.querySelector("time[datetime]");
+                var time = postedDate ? Date.parse(postedDate.getAttribute("datetime")) : NaN;
+                return isNaN(time) ? 0 : time;
+            }
+
+            jobs.sort(function (firstJob, secondJob) {
+                return getPostedTime(secondJob) - getPostedTime(firstJob);
+            });
+
+            jobs.forEach(function (job) {
+                jobList.appendChild(job);
+            });
+
+            function applyRoleFilter(filter) {
+                var visibleCount = 0;
+
+                jobs.forEach(function (job) {
+                    var matches = filter === "all" || job.getAttribute("data-role") === filter;
+                    job.hidden = !matches;
+                    if (matches) {
+                        visibleCount += 1;
+                    }
+                });
+
+                filterSummary.textContent =
+                    "Showing " + visibleCount + " " + (visibleCount === 1 ? "opening" : "openings") +
+                    ", newest first.";
+                filterEmpty.hidden = visibleCount > 0;
+            }
+
+            filterButtons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    var filter = button.getAttribute("data-role-filter");
+
+                    filterButtons.forEach(function (filterButton) {
+                        var isActive = filterButton === button;
+                        filterButton.classList.toggle("is-active", isActive);
+                        filterButton.setAttribute("aria-pressed", String(isActive));
+                    });
+
+                    applyRoleFilter(filter);
+                });
+            });
+
+            applyRoleFilter("all");
         }());
     </script>
 </body>

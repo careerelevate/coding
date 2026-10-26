@@ -631,6 +631,53 @@ h1 {
     text-align: center;
 }
 
+.job-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 10px;
+}
+
+.job-filter {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    color: #34445a;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 8px 16px;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.job-filter:hover,
+.job-filter:focus-visible {
+    border-color: #214d91;
+    outline: none;
+}
+
+.job-filter.is-active {
+    background: #214d91;
+    border-color: #214d91;
+    color: #ffffff;
+}
+
+.job-filter-summary {
+    color: #58677d;
+    font-size: 0.84rem;
+    margin: 0 0 18px;
+}
+
+.job-openings-list {
+    display: grid;
+    gap: 16px;
+}
+
+.job-opening[hidden] {
+    display: none;
+}
+
 .job-opening {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 250, 254, 0.96));
     border: 1px solid #d5dfeb;
@@ -663,7 +710,6 @@ h1 {
 }
 
 .job-opening-specialty,
-.job-opening-location,
 .job-opening-experience,
 .job-opening-application {
     color: #56657c;
@@ -673,13 +719,50 @@ h1 {
     margin: 4px 0 0;
 }
 
-.job-opening-location {
-    background: #eaf2ff;
-    border-radius: 999px;
-    font-size: 0.86rem;
+.job-opening-meta {
+    background: #f7fafc;
+    border: 1px solid #e1e8f0;
+    border-radius: 12px;
+    display: grid;
+    gap: 12px 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 18px 0;
+    padding: 14px 16px;
+}
+
+.job-opening-meta p {
+    color: #34445a;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    gap: 3px;
+    margin: 0;
+}
+
+.job-opening-meta-label {
+    color: #66758a;
+    font-size: 0.72rem;
     font-weight: 700;
-    margin: 2px 0 0;
-    padding: 7px 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.job-opening-role-value {
+    color: #214d91;
+    font-weight: 700;
+}
+
+.job-opening-posted time {
+    font-weight: 700;
+}
+
+.job-filter-empty {
+    background: #f4f7fb;
+    border-radius: 12px;
+    color: #56657c;
+    margin: 18px 0 0;
+    padding: 16px;
+    text-align: center;
 }
 
 .job-opening-experience {
@@ -969,8 +1052,46 @@ body,
     color: #b7c4d8;
 }
 
-[data-theme="dark"] .job-opening-location {
+[data-theme="dark"] .job-filter {
+    background: #1e293b;
+    border-color: #475569;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .job-filter:hover {
+    background: #29374d;
+}
+
+[data-theme="dark"] .job-filter.is-active {
+    background: #376bb4;
+    border-color: #376bb4;
+    color: #ffffff;
+}
+
+[data-theme="dark"] .job-filter-summary,
+[data-theme="dark"] .job-filter-empty {
+    color: #b7c4d8;
+}
+
+[data-theme="dark"] .job-filter-empty {
     background: #243249;
+}
+
+[data-theme="dark"] .job-opening-meta {
+    background: #1e293b;
+    border-color: #344258;
+}
+
+[data-theme="dark"] .job-opening-meta p {
+    color: #d6e0ef;
+}
+
+[data-theme="dark"] .job-opening-meta-label {
+    color: #93a4bd;
+}
+
+[data-theme="dark"] .job-opening-role-value {
+    color: #93c5fd;
 }
 
 [data-theme="dark"] .job-opening-application {
@@ -1159,5 +1280,15 @@ body,
 
     .online-code-editor {
         min-width: 768px;
+    }
+}
+
+@media (max-width: 560px) {
+    .job-opening {
+        padding: 18px;
+    }
+
+    .job-opening-meta {
+        grid-template-columns: 1fr;
     }
 }
