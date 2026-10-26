@@ -57,6 +57,6 @@ Use a disposable mailbox or email reflector that you can read, rather than a rea
 4. Open the spreadsheet's `Users` tab and confirm the row contains the test name, email, and enrollment date. Delete the test row when finished.
 5. After enrollment, signing in with the same address should send a new code. Calling the signup action again for that address should return the duplicate-account response.
 
-After editing `google-apps-script/Code.gs`, create a new deployment version from **Deploy > Manage deployments** so the `/exec` URL serves the updated code.
+After editing `google-apps-script/Code.gs`, create a new deployment version from **Deploy > Manage deployments** so the `/exec` URL serves the updated code. The script posts its response to the top-level page because Apps Script renders HtmlService output inside a sandboxed wrapper. If the site stays on “Contacting the sign-in service…”, the deployed script is still the old version.
 
 The current site does not restrict the public practice questions or code editor by account. Sign-in verifies the user's identity and records the account; do not treat the client-side signed-in display as authorization for private features.

@@ -308,8 +308,11 @@ function renderResponse_(response) {
     .replace(/</g, "\\u003c")
     .replace(/\u2028/g, "\\u2028")
     .replace(/\u2029/g, "\\u2029");
+  // HtmlService runs this response inside a nested sandboxed frame. Post to the
+  // top-level site, otherwise the intermediate Apps Script wrapper swallows the
+  // message and the site waits for a response that never arrives.
   var html = "<!doctype html><meta charset=\"utf-8\"><script>" +
-    "window.parent.postMessage(" + serialized + ", " + JSON.stringify(targetOrigin) + ");" +
+    "window.top.postMessage(" + serialized + ", " + JSON.stringify(targetOrigin) + ");" +
     "</script><p>Sign-in request complete. You can close this window.</p>";
   return HtmlService.createHtmlOutput(html)
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);

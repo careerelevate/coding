@@ -1196,8 +1196,12 @@ class RotateNumberRight {
     function handleAuthResponse(event) {
         var trustedOrigin = event.origin === "https://script.google.com" ||
             /^https:\/\/[a-z0-9.-]+\.googleusercontent\.com$/i.test(event.origin);
+        // Apps Script runs the response in a nested sandboxed frame, so the
+        // event source is not always the authResponseFrame itself. The
+        // per-request ID and trusted origin still bind it to this attempt.
         if (
-            event.source !== document.getElementById("authResponseFrame").contentWindow ||
+            !event.source ||
+            event.source === window ||
             !trustedOrigin ||
             !event.data ||
             event.data.kind !== "coding-practice-auth" ||
