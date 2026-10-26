@@ -81,6 +81,12 @@ h1 {
     max-width: 680px;
 }
 
+.openings-hero-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 14px;
+}
+
 .hero-intro-row {
     align-items: center;
     display: flex;
