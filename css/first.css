@@ -384,11 +384,6 @@ h1 {
     background: #eef3f9;
 }
 
-.auth-email-choice {
-    display: grid;
-    gap: 10px;
-}
-
 .auth-form {
     display: grid;
     gap: 14px;
@@ -428,7 +423,6 @@ h1 {
 }
 
 .auth-form[hidden],
-.auth-email-choice[hidden],
 .auth-methods[hidden],
 .auth-signed-in[hidden],
 .auth-field[hidden] {

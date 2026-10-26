@@ -1,4 +1,5 @@
 var AUTH_SHEET_NAME = "Users";
+var AUTH_SHEET_HEADERS = ["Email", "Name", "Provider", "Enrolled At"];
 var CODE_TTL_SECONDS = 600;
 var EMAIL_RESEND_SECONDS = 60;
 var MAX_CODE_ATTEMPTS = 5;
@@ -14,9 +15,20 @@ function setupAuth() {
   if (!usersSheet) {
     usersSheet = spreadsheet.insertSheet(AUTH_SHEET_NAME);
   }
+  ensureUsersSheetSchema_(usersSheet);
+  usersSheet.getRange(2, 4, Math.max(usersSheet.getMaxRows() - 1, 1), 1)
+    .setNumberFormat("yyyy-mm-dd");
+}
+
+function ensureUsersSheetSchema_(usersSheet) {
   if (usersSheet.getLastRow() === 0) {
-    usersSheet.appendRow(["Email", "Name", "Provider", "Created At"]);
+    usersSheet.appendRow(AUTH_SHEET_HEADERS);
     usersSheet.setFrozenRows(1);
+    return;
+  }
+  var header = usersSheet.getRange(1, 1, 1, 4).getValues()[0];
+  if (String(header[3]).trim() === "Created At") {
+    usersSheet.getRange(1, 4).setValue("Enrolled At");
   }
 }
 
@@ -235,12 +247,14 @@ function findUser_(email) {
 }
 
 function addUser_(email, name, provider) {
-  getUsersSheet_().appendRow([
+  var sheet = getUsersSheet_();
+  sheet.appendRow([
     escapeSheetText_(email),
     escapeSheetText_(name),
     provider,
     new Date()
   ]);
+  sheet.getRange(sheet.getLastRow(), 4).setNumberFormat("yyyy-mm-dd");
 }
 
 function getUsersSheet_() {
@@ -253,6 +267,7 @@ function getUsersSheet_() {
   if (!sheet) {
     throw new Error("The Users tab is missing. Run setupAuth from the Apps Script editor.");
   }
+  ensureUsersSheetSchema_(sheet);
   return sheet;
 }
 

@@ -7,7 +7,7 @@ The site is hosted on GitHub Pages, so it cannot safely access the user spreadsh
 1. Open the Google spreadsheet linked to the feedback form.
 2. Choose **Extensions > Apps Script**.
 3. Replace the editor's `Code.gs` content with [`google-apps-script/Code.gs`](./google-apps-script/Code.gs), then save.
-4. In the Apps Script editor, select `setupAuth` and click **Run**. Review and grant the requested spreadsheet permissions. This creates a `Users` tab in the same spreadsheet.
+4. In the Apps Script editor, select `setupAuth` and click **Run**. Review and grant the requested spreadsheet permissions. This creates a `Users` tab in the same spreadsheet and sets its columns to `Email`, `Name`, `Provider`, and `Enrolled At`. Running it on an existing sheet changes the old `Created At` header to `Enrolled At` and formats the date column as `yyyy-mm-dd`.
 5. In Apps Script, open **Project Settings > Script Properties** and add:
    - `SITE_ORIGIN` = `https://careerelevate.github.io`
    - `GOOGLE_CLIENT_ID` = the OAuth client ID created below
@@ -42,8 +42,21 @@ Commit and publish the configuration. For later Apps Script code changes, create
 ## Sign-in behavior
 
 - Google sign-in verifies the Google account and adds it to `Users` the first time it is used.
-- Email signup asks for a 3–15 character name and email, checks for duplicates, and sends a six-digit code before saving the account.
-- Email sign-in checks whether the account exists before sending a code. Unknown addresses are directed to signup. The code expires after 10 minutes and is limited to five attempts.
+- Email sign-in uses one form: the site checks the address, sends a code for an existing account, or reveals the name field when the address is new. There is no separate “Sign in” / “Sign up” choice.
+- New accounts are saved only after the six-digit email code is verified. The `Users` row contains the email, name, provider, and enrollment date.
+- Email codes expire after 10 minutes, are limited to five attempts, and can be resent after 60 seconds.
 - Email codes are sent by the Google account that owns the Apps Script deployment, subject to Google's sending quotas.
+
+## Testing the OTP flow
+
+Use a disposable mailbox or email reflector that you can read, rather than a real user's address:
+
+1. Open the site, choose **Sign in**, then **Continue with email**, and enter the test address.
+2. When the name field appears, enter a 3–15 character test name and submit.
+3. Confirm the mailbox receives a six-digit code, enter it on the site, and verify that the dialog shows the account was created.
+4. Open the spreadsheet's `Users` tab and confirm the row contains the test name, email, and enrollment date. Delete the test row when finished.
+5. After enrollment, signing in with the same address should send a new code. Calling the signup action again for that address should return the duplicate-account response.
+
+After editing `google-apps-script/Code.gs`, create a new deployment version from **Deploy > Manage deployments** so the `/exec` URL serves the updated code.
 
 The current site does not restrict the public practice questions or code editor by account. Sign-in verifies the user's identity and records the account; do not treat the client-side signed-in display as authorization for private features.
