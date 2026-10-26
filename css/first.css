@@ -710,13 +710,19 @@ h1 {
 }
 
 .job-opening-specialty,
+.job-opening-description,
 .job-opening-experience,
+.job-opening-education,
 .job-opening-application {
     color: #56657c;
 }
 
 .job-opening-specialty {
     margin: 4px 0 0;
+}
+
+.job-opening-description {
+    margin: 18px 0 20px;
 }
 
 .job-opening-meta {
@@ -765,7 +771,8 @@ h1 {
     text-align: center;
 }
 
-.job-opening-experience {
+.job-opening-experience,
+.job-opening-education {
     margin: 20px 0 14px;
 }
 
@@ -789,6 +796,7 @@ h1 {
 .job-opening-application {
     border-top: 1px solid #dce4ee;
     margin: 20px 0 0;
+    overflow-wrap: anywhere;
     padding-top: 16px;
 }
 
@@ -1049,8 +1057,10 @@ body,
 }
 
 [data-theme="dark"] .job-opening-specialty,
+[data-theme="dark"] .job-opening-description,
 [data-theme="dark"] .job-opening-location,
 [data-theme="dark"] .job-opening-experience,
+[data-theme="dark"] .job-opening-education,
 [data-theme="dark"] .job-opening-application,
 [data-theme="dark"] .job-opening-skills {
     color: #b7c4d8;
