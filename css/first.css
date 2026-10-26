@@ -711,7 +711,6 @@ h1 {
 
 .job-opening-specialty,
 .job-opening-description,
-.job-opening-experience,
 .job-opening-education,
 .job-opening-application {
     color: #56657c;
@@ -731,7 +730,7 @@ h1 {
     border-radius: 12px;
     display: grid;
     gap: 12px 20px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     margin: 18px 0;
     padding: 14px 16px;
 }
@@ -762,6 +761,83 @@ h1 {
     font-weight: 700;
 }
 
+.job-opening-details {
+    margin-top: 4px;
+}
+
+.job-opening-details-toggle {
+    align-items: center;
+    color: #214d91;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 0.9rem;
+    font-weight: 700;
+    gap: 8px;
+    list-style: none;
+    padding: 6px 0;
+}
+
+.job-opening-details-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.job-opening-details-toggle::after {
+    border-bottom: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    content: "";
+    height: 8px;
+    transform: rotate(45deg);
+    transition: transform 160ms ease;
+    width: 8px;
+}
+
+.job-opening-details[open] .job-opening-details-toggle::after {
+    transform: rotate(-135deg);
+}
+
+.job-opening-details-toggle:hover {
+    text-decoration: underline;
+}
+
+.job-opening-details-toggle:focus-visible {
+    border-radius: 4px;
+    outline: 2px solid #214d91;
+    outline-offset: 3px;
+}
+
+.job-opening-details-close {
+    display: none;
+}
+
+.job-opening-details[open] .job-opening-details-open {
+    display: none;
+}
+
+.job-opening-details[open] .job-opening-details-close {
+    display: inline;
+}
+
+.job-opening-details-body {
+    padding-top: 4px;
+}
+
+.job-opening-additional {
+    background: #f7fafc;
+    border: 1px solid #e1e8f0;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 14px 16px;
+}
+
+.job-opening-additional h4 {
+    margin: 0 0 6px;
+}
+
+.job-opening-additional p {
+    color: #56657c;
+    margin: 0;
+}
+
 .job-filter-empty {
     background: #f4f7fb;
     border-radius: 12px;
@@ -771,7 +847,6 @@ h1 {
     text-align: center;
 }
 
-.job-opening-experience,
 .job-opening-education {
     margin: 20px 0 14px;
 }
@@ -1059,7 +1134,6 @@ body,
 [data-theme="dark"] .job-opening-specialty,
 [data-theme="dark"] .job-opening-description,
 [data-theme="dark"] .job-opening-location,
-[data-theme="dark"] .job-opening-experience,
 [data-theme="dark"] .job-opening-education,
 [data-theme="dark"] .job-opening-application,
 [data-theme="dark"] .job-opening-skills {
@@ -1106,6 +1180,23 @@ body,
 
 [data-theme="dark"] .job-opening-role-value {
     color: #93c5fd;
+}
+
+[data-theme="dark"] .job-opening-details-toggle {
+    color: #93c5fd;
+}
+
+[data-theme="dark"] .job-opening-details-toggle:focus-visible {
+    outline-color: #93c5fd;
+}
+
+[data-theme="dark"] .job-opening-additional {
+    background: #1e293b;
+    border-color: #344258;
+}
+
+[data-theme="dark"] .job-opening-additional p {
+    color: #b7c4d8;
 }
 
 [data-theme="dark"] .job-opening-application {
@@ -1241,6 +1332,12 @@ body,
 .keywords-text {
     color: #6cb6ff;
     font-weight: 600;
+}
+
+@media (max-width: 860px) {
+    .job-opening-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 720px) {
