@@ -1103,6 +1103,12 @@ body,
 }
 
 @media (max-width: 720px) {
+    h1 {
+        font-size: clamp(1.55rem, 7vw, 2.1rem);
+        line-height: 1.15;
+        white-space: normal;
+    }
+
     .theme-toggle {
         right: 12px;
         top: 10px;
@@ -1110,6 +1116,19 @@ body,
 
     .page-shell {
         padding: 54px 14px 40px;
+    }
+
+    .hero-copy,
+    .feedback-action {
+        flex: 1 1 100%;
+    }
+
+    .hero-stats {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .stat-card {
+        padding: 16px;
     }
 
     .content-panel {
