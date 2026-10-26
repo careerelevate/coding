@@ -774,6 +774,10 @@ h1 {
     margin: 0 0 8px;
 }
 
+.job-opening-skills + h4 {
+    margin-top: 20px;
+}
+
 .job-opening-skills {
     color: #34445a;
     display: grid;
