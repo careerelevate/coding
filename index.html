@@ -1120,6 +1120,15 @@ class RotateNumberRight {
         return backendUrl.toString();
     }
 
+    function resetAuthResponseFrame() {
+        var frame = document.getElementById("authResponseFrame");
+        if (!frame) {
+            return;
+        }
+        var freshFrame = frame.cloneNode(false);
+        frame.replaceWith(freshFrame);
+    }
+
     function submitAuthRequest(action, values) {
         var backendUrl;
         try {
@@ -1153,6 +1162,7 @@ class RotateNumberRight {
             );
         }, 30000);
 
+        resetAuthResponseFrame();
         var form = document.createElement("form");
         form.method = "post";
         form.action = backendUrl;
