@@ -22,14 +22,11 @@
                     copy solutions, and run your own code with AI-powered error help.
                 </p>
                 <div class="feedback-action">
-                    <a class="feedback-button" id="feedbackLink" hidden target="_blank" rel="noopener noreferrer">
-                        Give feedback
-                    </a>
-                    <button class="feedback-button" id="feedbackUnavailable" type="button" disabled>
+                    <button class="feedback-button" id="feedbackButton" type="button" aria-haspopup="dialog" aria-controls="feedbackDialog">
                         Give feedback
                     </button>
                     <p class="feedback-status" id="feedbackStatus" role="status">
-                        Feedback submissions will be enabled when a Google Form linked to the response Sheet is connected.
+                        Tell us what is working and what could be improved.
                     </p>
                 </div>
             </div>
@@ -45,9 +42,110 @@
                 <div class="stat-card">
                     <span class="stat-label">Code Editor</span>
                     <strong class="stat-value">Run + AI Debugging</strong>
+                    <button class="sign-in-button" id="signInButton" type="button">Sign in</button>
                 </div>
+                <a class="stat-card stat-card-link" href="./current-openings.html">
+                    <span class="stat-label">Careers</span>
+                    <strong class="stat-value">Current Openings</strong>
+                    <span class="stat-card-link-hint">Explore job opportunities &rarr;</span>
+                </a>
             </div>
         </section>
+
+        <dialog class="auth-dialog" id="authDialog" aria-labelledby="authDialogTitle">
+            <div class="auth-dialog-header">
+                <div>
+                    <p class="auth-eyebrow">Coding Practice</p>
+                    <h2 id="authDialogTitle">Sign in</h2>
+                </div>
+                <button class="auth-close-button" id="authCloseButton" type="button" aria-label="Close sign-in dialog">&times;</button>
+            </div>
+            <p class="auth-description">Sign in to your account to continue.</p>
+            <div class="auth-status" id="authStatus" role="status" aria-live="polite"></div>
+
+            <section class="auth-methods" id="authMethods" aria-label="Choose a sign-in method">
+                <div class="google-sign-in-slot" id="googleSignInButton"></div>
+                <p class="auth-setup-note" id="googleSetupNote"></p>
+                <div class="auth-divider"><span>or</span></div>
+                <button class="auth-secondary-button" id="ownEmailButton" type="button">Continue with email</button>
+            </section>
+
+            <section class="auth-email-choice" id="authEmailChoice" hidden>
+                <button class="auth-secondary-button" id="emailSignInChoice" type="button">Sign in</button>
+                <button class="auth-secondary-button" id="emailSignUpChoice" type="button">Sign up</button>
+                <button class="auth-back-button" id="authMethodsBack" type="button">Back</button>
+            </section>
+
+            <form class="auth-form" id="authEmailForm" hidden novalidate>
+                <label class="auth-field" id="authNameField" hidden>
+                    <span>Name</span>
+                    <input id="authName" name="name" type="text" autocomplete="name" minlength="3" maxlength="30">
+                    <small>Use 3–15 characters.</small>
+                </label>
+                <label class="auth-field">
+                    <span>Email address</span>
+                    <input id="authEmail" name="email" type="email" autocomplete="email" maxlength="254" required>
+                </label>
+                <button class="auth-primary-button" id="authEmailSubmit" type="submit">Continue</button>
+                <button class="auth-back-button" id="authEmailBack" type="button">Back</button>
+            </form>
+
+            <form class="auth-form" id="authCodeForm" hidden>
+                <p class="auth-code-help" id="authCodeHelp"></p>
+                <label class="auth-field">
+                    <span>Verification code</span>
+                    <input id="authCode" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" minlength="6" maxlength="6" required>
+                </label>
+                <button class="auth-primary-button" type="submit">Verify and sign in</button>
+                <button class="auth-back-button" id="authCodeBack" type="button">Back</button>
+            </form>
+
+            <section class="auth-signed-in" id="authSignedIn" hidden>
+                <p id="authSignedInMessage"></p>
+                <button class="auth-secondary-button" id="authSignOutButton" type="button">Sign out</button>
+            </section>
+            <p class="auth-setup-note" id="authServiceSetupNote"></p>
+            <p class="auth-privacy-note">Email sign-in uses a one-time code. Your name and email are stored in a dedicated users tab in the linked Google Sheet.</p>
+        </dialog>
+        <iframe class="auth-response-frame" id="authResponseFrame" name="authResponseFrame" title="Sign-in response" aria-hidden="true"></iframe>
+
+        <dialog class="auth-dialog feedback-dialog" id="feedbackDialog" aria-labelledby="feedbackDialogTitle">
+            <div class="auth-dialog-header">
+                <div>
+                    <p class="auth-eyebrow">Coding Practice</p>
+                    <h2 id="feedbackDialogTitle">Share your feedback</h2>
+                </div>
+                <button class="auth-close-button" id="feedbackCloseButton" type="button" aria-label="Close feedback form">&times;</button>
+            </div>
+            <p class="auth-description" id="feedbackDescription">
+                Tell us what is working well and what could be improved.
+            </p>
+            <div class="auth-status" id="feedbackDialogStatus" role="status" aria-live="polite"></div>
+
+            <form class="auth-form" id="feedbackForm" novalidate>
+                <label class="auth-field">
+                    <span>Email address</span>
+                    <input id="feedbackEmail" name="email" type="email" autocomplete="email" maxlength="254" required>
+                </label>
+                <label class="auth-field">
+                    <span>Your feedback</span>
+                    <textarea id="feedbackMessage" name="feedback" rows="5" maxlength="5000" required></textarea>
+                </label>
+                <button class="auth-primary-button" id="feedbackSubmitButton" type="submit">Submit feedback</button>
+                <button class="auth-back-button" id="feedbackCancelButton" type="button">Cancel</button>
+            </form>
+
+            <section class="auth-signed-in" id="feedbackSuccess" hidden>
+                <p id="feedbackSuccessMessage"></p>
+                <button class="auth-secondary-button" id="feedbackDoneButton" type="button">Close</button>
+                <button class="auth-back-button" id="feedbackDifferentEmailButton" type="button" hidden>Use a different email</button>
+            </section>
+
+            <p class="auth-privacy-note">
+                Your response is sent to the site's Google Forms feedback sheet. To prevent duplicate feedback, this browser remembers which email addresses have already submitted.
+            </p>
+        </dialog>
+        <iframe class="auth-response-frame" id="feedbackResponseFrame" name="feedbackResponseFrame" title="Feedback submission" aria-hidden="true"></iframe>
 
         <section class="content-panel">
             <div class="section-heading">
@@ -670,43 +768,681 @@ class RotateNumberRight {
         </section>
     </main>
     <script src="./solutions.js"></script>
+    <script src="./auth-config.js"></script>
     <script>
-    var feedbackFormUrl =
-        "https://docs.google.com/forms/d/e/1FAIpQLSfLxqQSOz8g5cc5efIjETtr7b7lC63SkSMQTJYyWmVIh9kgYg/viewform";
+    var feedbackConfig = {
+        formUrl:
+            "https://docs.google.com/forms/d/e/1FAIpQLSfLxqQSOz8g5cc5efIjETtr7b7lC63SkSMQTJYyWmVIh9kgYg/viewform",
+        formResponseUrl:
+            "https://docs.google.com/forms/d/e/1FAIpQLSfLxqQSOz8g5cc5efIjETtr7b7lC63SkSMQTJYyWmVIh9kgYg/formResponse",
+        emailEntry: "entry.2001320293",
+        feedbackEntry: "entry.496284840",
+        storageKey: "coding-practice-feedback-submissions",
+        lastEmailKey: "coding-practice-feedback-email",
+        maxFeedbackLength: 5000,
+        timeoutMs: 30000
+    };
 
-    function configureFeedbackLink() {
-        var feedbackLink = document.getElementById("feedbackLink");
-        var unavailableButton = document.getElementById("feedbackUnavailable");
+    var feedbackState = {
+        submitting: false,
+        responseTimer: 0,
+        submittedEmails: {}
+    };
+
+    function validateFeedbackConfig() {
+        var formUrl = new URL(feedbackConfig.formUrl);
+        if (
+            formUrl.protocol !== "https:" ||
+            !(
+                formUrl.hostname === "docs.google.com" &&
+                formUrl.pathname.indexOf("/forms/") === 0
+            ) &&
+            formUrl.hostname !== "forms.gle"
+        ) {
+            throw new Error("Feedback URL must be a public Google Forms responder link.");
+        }
+
+        var responseUrl = new URL(feedbackConfig.formResponseUrl);
+        if (
+            responseUrl.protocol !== "https:" ||
+            responseUrl.hostname !== "docs.google.com" ||
+            !/^\/forms\/d\/e\/[^/]+\/formResponse$/.test(responseUrl.pathname)
+        ) {
+            throw new Error("Feedback response URL must be a Google Forms formResponse link.");
+        }
+    }
+
+    function initializeFeedbackForm() {
+        var feedbackButton = document.getElementById("feedbackButton");
         var feedbackStatus = document.getElementById("feedbackStatus");
-        if (!feedbackFormUrl) {
-            return;
-        }
+        var dialog = document.getElementById("feedbackDialog");
+        var form = document.getElementById("feedbackForm");
+        var description = document.getElementById("feedbackDescription");
+        var status = document.getElementById("feedbackDialogStatus");
+        var emailInput = document.getElementById("feedbackEmail");
+        var messageInput = document.getElementById("feedbackMessage");
+        var submitButton = document.getElementById("feedbackSubmitButton");
+        var responseFrame = document.getElementById("feedbackResponseFrame");
+        var successSection = document.getElementById("feedbackSuccess");
+        var successMessage = document.getElementById("feedbackSuccessMessage");
+        var differentEmailButton = document.getElementById("feedbackDifferentEmailButton");
+        var doneButton = document.getElementById("feedbackDoneButton");
 
-        var formUrl;
         try {
-            formUrl = new URL(feedbackFormUrl);
-            if (
-                formUrl.protocol !== "https:" ||
-                !(
-                    formUrl.hostname === "docs.google.com" &&
-                    formUrl.pathname.indexOf("/forms/") === 0
-                ) &&
-                formUrl.hostname !== "forms.gle"
-            ) {
-                throw new Error("Feedback URL must be a public Google Forms responder link.");
-            }
+            validateFeedbackConfig();
         } catch (error) {
-            feedbackStatus.textContent =
-                "The feedback form link is invalid. Configure a public Google Forms responder URL.";
-            console.error("Unable to configure the feedback form link.", error);
+            feedbackButton.disabled = true;
+            feedbackStatus.textContent = "Feedback is temporarily unavailable.";
+            console.error("Unable to configure the feedback form.", error);
             return;
         }
 
-        feedbackLink.href = formUrl.toString();
-        feedbackLink.hidden = false;
-        unavailableButton.hidden = true;
-        feedbackStatus.textContent =
-            "Your feedback opens a Google Form and is saved to its linked response Sheet.";
+        function setStatus(message, state) {
+            status.textContent = message;
+            if (state) {
+                status.dataset.state = state;
+            } else {
+                delete status.dataset.state;
+            }
+        }
+
+        function showFormView() {
+            form.hidden = false;
+            successSection.hidden = true;
+            description.hidden = false;
+            differentEmailButton.hidden = true;
+            document.getElementById("feedbackDialogTitle").textContent = "Share your feedback";
+            setStatus("", "");
+        }
+
+        function showSuccessView(title, message, allowDifferentEmail) {
+            form.hidden = true;
+            successSection.hidden = false;
+            description.hidden = true;
+            differentEmailButton.hidden = !allowDifferentEmail;
+            document.getElementById("feedbackDialogTitle").textContent = title;
+            successMessage.textContent = message;
+            setStatus("", "");
+        }
+
+        function readFeedbackHistory() {
+            var history = {};
+            try {
+                var raw = window.localStorage.getItem(feedbackConfig.storageKey);
+                if (raw) {
+                    var parsed = JSON.parse(raw);
+                    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+                        history = parsed;
+                    }
+                }
+            } catch (error) {
+                console.error("Unable to read saved feedback history.", error);
+            }
+            return history;
+        }
+
+        function getLastFeedbackEmail() {
+            try {
+                return window.localStorage.getItem(feedbackConfig.lastEmailKey) || "";
+            } catch (error) {
+                console.error("Unable to read the last feedback email.", error);
+                return "";
+            }
+        }
+
+        function hasFeedback(email) {
+            return Boolean(feedbackState.submittedEmails[email]) ||
+                Object.prototype.hasOwnProperty.call(readFeedbackHistory(), email);
+        }
+
+        function rememberFeedback(email) {
+            feedbackState.submittedEmails[email] = true;
+            var history = readFeedbackHistory();
+            history[email] = { submittedAt: new Date().toISOString() };
+            try {
+                window.localStorage.setItem(
+                    feedbackConfig.storageKey,
+                    JSON.stringify(history)
+                );
+                window.localStorage.setItem(feedbackConfig.lastEmailKey, email);
+            } catch (error) {
+                console.error("Unable to save feedback history.", error);
+            }
+        }
+
+        function openFeedbackDialog() {
+            if (dialog.open) {
+                return;
+            }
+            if (feedbackState.submitting) {
+                dialog.showModal();
+                return;
+            }
+
+            var accountEmail = authState.user && authState.user.email
+                ? String(authState.user.email).trim().toLowerCase()
+                : "";
+            var email = accountEmail || getLastFeedbackEmail();
+            if (email) {
+                emailInput.value = email;
+            }
+
+            if (email && hasFeedback(email)) {
+                showSuccessView(
+                    "Feedback already given",
+                    "You have already given feedback with " + email + ". Thank you!",
+                    true
+                );
+            } else {
+                showFormView();
+            }
+
+            dialog.showModal();
+            window.setTimeout(function () {
+                if (!form.hidden) {
+                    if (emailInput.value) {
+                        messageInput.focus();
+                    } else {
+                        emailInput.focus();
+                    }
+                } else if (dialog.open) {
+                    doneButton.focus();
+                }
+            }, 50);
+        }
+
+        function useDifferentEmail() {
+            emailInput.value = "";
+            messageInput.value = "";
+            showFormView();
+            emailInput.focus();
+        }
+
+        function finishSubmission() {
+            window.clearTimeout(feedbackState.responseTimer);
+            feedbackState.responseTimer = 0;
+            feedbackState.submitting = false;
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit feedback";
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            if (feedbackState.submitting) {
+                return;
+            }
+
+            var email = emailInput.value.trim().toLowerCase();
+            var message = messageInput.value.trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
+                setStatus("Enter a valid email address.", "error");
+                emailInput.focus();
+                return;
+            }
+            if (!message) {
+                setStatus("Please enter your feedback.", "error");
+                messageInput.focus();
+                return;
+            }
+            if (message.length > feedbackConfig.maxFeedbackLength) {
+                setStatus(
+                    "Feedback must be " + feedbackConfig.maxFeedbackLength +
+                    " characters or fewer.",
+                    "error"
+                );
+                messageInput.focus();
+                return;
+            }
+            if (hasFeedback(email)) {
+                setStatus(
+                    "You have already given feedback with this email address.",
+                    "error"
+                );
+                return;
+            }
+
+            feedbackState.submitting = true;
+            setStatus("Sending your feedback…", "");
+            submitButton.disabled = true;
+            submitButton.textContent = "Sending feedback…";
+
+            function handleResponse() {
+                if (!feedbackState.submitting) {
+                    return;
+                }
+                finishSubmission();
+                rememberFeedback(email);
+                showSuccessView(
+                    "Feedback received",
+                    "Thank you! Your feedback has been given successfully.",
+                    false
+                );
+                feedbackStatus.textContent = "Feedback given successfully. Thank you!";
+                if (dialog.open) {
+                    doneButton.focus();
+                }
+            }
+
+            responseFrame.addEventListener("load", handleResponse, { once: true });
+            feedbackState.responseTimer = window.setTimeout(function () {
+                if (!feedbackState.submitting) {
+                    return;
+                }
+                finishSubmission();
+                responseFrame.removeEventListener("load", handleResponse);
+                setStatus(
+                    "We could not confirm that your feedback was sent. Check your connection and try again.",
+                    "error"
+                );
+            }, feedbackConfig.timeoutMs);
+
+            var googleForm = document.createElement("form");
+            googleForm.method = "POST";
+            googleForm.action = feedbackConfig.formResponseUrl;
+            googleForm.target = "feedbackResponseFrame";
+            googleForm.acceptCharset = "UTF-8";
+            googleForm.hidden = true;
+
+            var fields = {};
+            fields[feedbackConfig.emailEntry] = email;
+            fields[feedbackConfig.feedbackEntry] = message;
+            Object.keys(fields).forEach(function (name) {
+                var input = document.createElement("input");
+                input.type = "hidden";
+                input.name = name;
+                input.value = fields[name];
+                googleForm.appendChild(input);
+            });
+
+            document.body.appendChild(googleForm);
+            googleForm.submit();
+            window.setTimeout(function () {
+                googleForm.remove();
+            }, 1000);
+        }
+
+        feedbackButton.addEventListener("click", openFeedbackDialog);
+        document.getElementById("feedbackCloseButton").addEventListener("click", function () {
+            dialog.close();
+        });
+        document.getElementById("feedbackCancelButton").addEventListener("click", function () {
+            dialog.close();
+        });
+        doneButton.addEventListener("click", function () {
+            dialog.close();
+        });
+        differentEmailButton.addEventListener("click", useDifferentEmail);
+        dialog.addEventListener("click", function (event) {
+            if (event.target === dialog) {
+                dialog.close();
+            }
+        });
+        form.addEventListener("submit", handleSubmit);
+    }
+
+    var authState = {
+        mode: "signin",
+        email: "",
+        pendingRequestId: "",
+        pendingTimeout: 0,
+        user: null,
+        googleNonce: "",
+        googleLoading: false,
+        googleInitialized: false
+    };
+
+    function setAuthStatus(message, state) {
+        var status = document.getElementById("authStatus");
+        status.textContent = message;
+        if (state) {
+            status.dataset.state = state;
+        } else {
+            delete status.dataset.state;
+        }
+    }
+
+    function showAuthView(view) {
+        ["authMethods", "authEmailChoice", "authEmailForm", "authCodeForm", "authSignedIn"]
+            .forEach(function (id) {
+                document.getElementById(id).hidden = id !== view;
+            });
+    }
+
+    function getAuthBackendUrl() {
+        var configuredUrl = window.codingPracticeAuthConfig &&
+            window.codingPracticeAuthConfig.appsScriptUrl;
+        if (!configuredUrl) {
+            return "";
+        }
+
+        var backendUrl = new URL(configuredUrl);
+        if (
+            backendUrl.protocol !== "https:" ||
+            backendUrl.hostname !== "script.google.com" ||
+            !/^\/macros\/s\/[^/]+\/exec$/.test(backendUrl.pathname)
+        ) {
+            throw new Error("The sign-in service URL is not a valid deployed Google Apps Script web app URL.");
+        }
+        return backendUrl.toString();
+    }
+
+    function submitAuthRequest(action, values) {
+        var backendUrl;
+        try {
+            backendUrl = getAuthBackendUrl();
+        } catch (error) {
+            setAuthStatus(error.message, "error");
+            return;
+        }
+        if (!backendUrl) {
+            setAuthStatus(
+                "Sign-in is not connected yet. The secure Google Sheets service must be deployed and configured first.",
+                "error"
+            );
+            return;
+        }
+        if (authState.pendingRequestId) {
+            setAuthStatus("Please wait for the current sign-in request to finish.", "error");
+            return;
+        }
+
+        var requestId = window.crypto && window.crypto.randomUUID
+            ? window.crypto.randomUUID()
+            : String(Date.now()) + "-" + String(Math.random()).slice(2);
+        authState.pendingRequestId = requestId;
+        setAuthStatus("Contacting the sign-in service…");
+        authState.pendingTimeout = window.setTimeout(function () {
+            authState.pendingRequestId = "";
+            setAuthStatus(
+                "The sign-in service did not respond. Check that the Apps Script web app is deployed and try again.",
+                "error"
+            );
+        }, 30000);
+
+        var form = document.createElement("form");
+        form.method = "post";
+        form.action = backendUrl;
+        form.target = "authResponseFrame";
+        form.hidden = true;
+        var fields = Object.assign({}, values, {
+            action: action,
+            requestId: requestId
+        });
+        Object.keys(fields).forEach(function (name) {
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = name;
+            input.value = fields[name];
+            form.appendChild(input);
+        });
+        document.body.appendChild(form);
+        form.submit();
+        window.setTimeout(function () {
+            form.remove();
+        }, 1000);
+    }
+
+    function finishSignIn(user) {
+        authState.pendingRequestId = "";
+        authState.user = {
+            name: user.name,
+            email: user.email
+        };
+        showAuthView("authSignedIn");
+        document.getElementById("authDialogTitle").textContent = "You're signed in";
+        document.getElementById("authSignedInMessage").textContent =
+            "Signed in as " + user.name + " (" + user.email + ").";
+        document.getElementById("signInButton").textContent = "Signed in";
+        setAuthStatus("", "");
+    }
+
+    function handleAuthResponse(event) {
+        var trustedOrigin = event.origin === "https://script.google.com" ||
+            /^https:\/\/[a-z0-9.-]+\.googleusercontent\.com$/i.test(event.origin);
+        if (
+            event.source !== document.getElementById("authResponseFrame").contentWindow ||
+            !trustedOrigin ||
+            !event.data ||
+            event.data.kind !== "coding-practice-auth" ||
+            event.data.requestId !== authState.pendingRequestId
+        ) {
+            return;
+        }
+
+        window.clearTimeout(authState.pendingTimeout);
+        authState.pendingRequestId = "";
+        var result = event.data;
+        if (result.status === "signed-in") {
+            finishSignIn(result.user);
+        } else if (result.status === "code-sent") {
+            authState.email = result.email;
+            document.getElementById("authCodeHelp").textContent =
+                "We sent a six-digit verification code to " + result.email + ". The code expires in 10 minutes.";
+            document.getElementById("authCode").value = "";
+            showAuthView("authCodeForm");
+            document.getElementById("authDialogTitle").textContent = "Verify your email";
+            setAuthStatus("", "");
+            document.getElementById("authCode").focus();
+        } else if (result.status === "new-user") {
+            showAuthView("authEmailChoice");
+            setAuthStatus(
+                "No account was found for that email. You're a new user—please choose Sign up.",
+                "error"
+            );
+        } else if (result.status === "duplicate") {
+            showAuthView("authEmailChoice");
+            setAuthStatus(
+                "That email is already registered. Please choose Sign in instead.",
+                "error"
+            );
+        } else {
+            setAuthStatus(
+                result.message || "The sign-in request could not be completed. Please try again.",
+                "error"
+            );
+        }
+    }
+
+    function initializeGoogleSignIn() {
+        var googleClientId = window.codingPracticeAuthConfig &&
+            window.codingPracticeAuthConfig.googleClientId;
+        var setupNote = document.getElementById("googleSetupNote");
+        var serviceSetupNote = document.getElementById("authServiceSetupNote");
+        var backendUrl = "";
+        try {
+            backendUrl = getAuthBackendUrl();
+        } catch (error) {
+            serviceSetupNote.textContent = error.message;
+        }
+        if (!backendUrl && !serviceSetupNote.textContent) {
+            serviceSetupNote.textContent =
+                "Email sign-in needs the Apps Script web app URL configured in auth-config.js.";
+        }
+        if (!googleClientId) {
+            setupNote.textContent =
+                "Google sign-in will be available after an OAuth client ID is configured.";
+            return;
+        }
+        if (authState.googleLoading || authState.googleInitialized) {
+            return;
+        }
+
+        authState.googleLoading = true;
+        var script = document.createElement("script");
+        script.src = "https://accounts.google.com/gsi/client";
+        script.async = true;
+        script.defer = true;
+        script.onload = function () {
+            authState.googleLoading = false;
+            if (authState.googleInitialized) {
+                return;
+            }
+            if (!window.google || !window.google.accounts) {
+                setupNote.textContent =
+                    "Google sign-in could not initialize. Try email sign-in or reload the page.";
+                return;
+            }
+            if (!window.crypto || !window.crypto.getRandomValues) {
+                setupNote.textContent =
+                    "Google sign-in requires a secure browser with cryptographic randomness.";
+                return;
+            }
+            var nonceBytes = new Uint8Array(24);
+            window.crypto.getRandomValues(nonceBytes);
+            authState.googleNonce = Array.from(nonceBytes).map(function (byte) {
+                return byte.toString(16).padStart(2, "0");
+            }).join("");
+            authState.googleInitialized = true;
+            window.google.accounts.id.initialize({
+                client_id: googleClientId,
+                nonce: authState.googleNonce,
+                callback: function (credentialResponse) {
+                    if (credentialResponse.credential) {
+                        submitAuthRequest("googleSignIn", {
+                            idToken: credentialResponse.credential,
+                            nonce: authState.googleNonce
+                        });
+                    } else {
+                        setAuthStatus("Google did not return a sign-in credential.", "error");
+                    }
+                }
+            });
+            window.google.accounts.id.renderButton(
+                document.getElementById("googleSignInButton"),
+                {
+                    theme: document.documentElement.dataset.theme === "dark" ? "filled_black" : "outline",
+                    size: "large",
+                    text: "continue_with",
+                    shape: "rectangular",
+                    width: Math.min(
+                        350,
+                        Math.max(180, document.querySelector(".auth-dialog").clientWidth - 52)
+                    )
+                }
+            );
+            setupNote.textContent = "";
+        };
+        script.onerror = function () {
+            authState.googleLoading = false;
+            setupNote.textContent =
+                "Google sign-in could not load. Check your connection or try email sign-in.";
+        };
+        document.head.appendChild(script);
+    }
+
+    function initializeSignIn() {
+        var dialog = document.getElementById("authDialog");
+        var emailForm = document.getElementById("authEmailForm");
+        var emailInput = document.getElementById("authEmail");
+        var nameInput = document.getElementById("authName");
+        var codeInput = document.getElementById("authCode");
+
+        document.getElementById("signInButton").addEventListener("click", function () {
+            dialog.showModal();
+            initializeGoogleSignIn();
+            setAuthStatus("", "");
+            if (authState.user) {
+                showAuthView("authSignedIn");
+                document.getElementById("authDialogTitle").textContent = "You're signed in";
+                document.getElementById("authSignedInMessage").textContent =
+                    "Signed in as " + authState.user.name + " (" + authState.user.email + ").";
+            } else {
+                showAuthView("authMethods");
+                document.getElementById("authDialogTitle").textContent = "Sign in";
+            }
+        });
+        document.getElementById("authCloseButton").addEventListener("click", function () {
+            dialog.close();
+        });
+        dialog.addEventListener("click", function (event) {
+            if (event.target === dialog) {
+                dialog.close();
+            }
+        });
+        document.getElementById("ownEmailButton").addEventListener("click", function () {
+            showAuthView("authEmailChoice");
+            setAuthStatus("", "");
+        });
+        document.getElementById("authMethodsBack").addEventListener("click", function () {
+            showAuthView("authMethods");
+            setAuthStatus("", "");
+        });
+        document.getElementById("emailSignInChoice").addEventListener("click", function () {
+            authState.mode = "signin";
+            document.getElementById("authNameField").hidden = true;
+            nameInput.required = false;
+            emailForm.hidden = false;
+            showAuthView("authEmailForm");
+            document.getElementById("authDialogTitle").textContent = "Sign in with email";
+            emailInput.value = "";
+            emailInput.focus();
+        });
+        document.getElementById("emailSignUpChoice").addEventListener("click", function () {
+            authState.mode = "signup";
+            document.getElementById("authNameField").hidden = false;
+            nameInput.required = true;
+            emailForm.hidden = false;
+            showAuthView("authEmailForm");
+            document.getElementById("authDialogTitle").textContent = "Create your account";
+            nameInput.value = "";
+            emailInput.value = "";
+            nameInput.focus();
+        });
+        document.getElementById("authEmailBack").addEventListener("click", function () {
+            showAuthView("authEmailChoice");
+            setAuthStatus("", "");
+        });
+        emailForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var email = emailInput.value.trim().toLowerCase();
+            if (!emailInput.validity.valid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                setAuthStatus("Enter a valid email address.", "error");
+                emailInput.focus();
+                return;
+            }
+            var values = {
+                email: email,
+                mode: authState.mode
+            };
+            if (authState.mode === "signup") {
+                var name = nameInput.value.trim();
+                var nameLength = Array.from(name).length;
+                if (nameLength < 3 || nameLength > 15) {
+                    setAuthStatus("Name must be between 3 and 15 characters.", "error");
+                    nameInput.focus();
+                    return;
+                }
+                values.name = name;
+            }
+            submitAuthRequest("sendCode", values);
+        });
+        document.getElementById("authCodeForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            if (!/^\d{6}$/.test(codeInput.value.trim())) {
+                setAuthStatus("Enter the six-digit code sent to your email.", "error");
+                codeInput.focus();
+                return;
+            }
+            submitAuthRequest("verifyCode", {
+                email: authState.email,
+                mode: authState.mode,
+                code: codeInput.value.trim()
+            });
+        });
+        document.getElementById("authCodeBack").addEventListener("click", function () {
+            showAuthView("authEmailForm");
+            document.getElementById("authDialogTitle").textContent =
+                authState.mode === "signup" ? "Create your account" : "Sign in with email";
+            setAuthStatus("", "");
+        });
+        document.getElementById("authSignOutButton").addEventListener("click", function () {
+            authState.user = null;
+            document.getElementById("signInButton").textContent = "Sign in";
+            showAuthView("authMethods");
+            document.getElementById("authDialogTitle").textContent = "Sign in";
+            setAuthStatus("You are signed out.", "success");
+        });
+        window.addEventListener("message", handleAuthResponse);
     }
 
     function setTheme(theme) {
@@ -1175,7 +1911,8 @@ class RotateNumberRight {
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        configureFeedbackLink();
+        initializeFeedbackForm();
+        initializeSignIn();
         initializeThemeToggle();
         buildQuestionAccordion();
         var codeBlocks = document.querySelectorAll(".code-block");

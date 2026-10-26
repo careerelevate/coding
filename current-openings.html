@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore current job openings and career opportunities." />
+    <title>Current Openings | Coding Practice</title>
+    <link rel="stylesheet" href="./css/first.css" />
+</head>
+
+<body>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-toggle-indicator" aria-hidden="true"></span>
+        <span class="theme-toggle-label">Dark mode</span>
+    </button>
+    <main class="page-shell">
+        <header class="hero">
+            <p class="eyebrow">Careers</p>
+            <h1>Current Openings</h1>
+            <p class="hero-copy">Find your next opportunity and take the next step in your career.</p>
+        </header>
+
+        <section class="content-panel" aria-labelledby="openingsHeading">
+            <div class="section-heading">
+                <div>
+                    <h2 id="openingsHeading">Job opportunities</h2>
+                    <p>Explore current roles and application details.</p>
+                </div>
+            </div>
+            <article class="job-opening" aria-labelledby="seniorQaTitle">
+                <div class="job-opening-heading">
+                    <div>
+                        <p class="job-opening-type">W2 / 1099</p>
+                        <h3 id="seniorQaTitle">Senior QA Engineer / QA Lead</h3>
+                        <p class="job-opening-specialty">Application, API &amp; Automation Testing</p>
+                    </div>
+                    <p class="job-opening-location">Irving, TX · Onsite</p>
+                </div>
+
+                <p class="job-opening-experience"><strong>Experience:</strong> 10+ years</p>
+                <h4>Key skills</h4>
+                <ul class="job-opening-skills">
+                    <li>Application testing: functional, regression, integration, and end-to-end testing</li>
+                    <li>API testing: REST, JSON/XML, and backend validation</li>
+                    <li>Test automation: UI/API automation and automation frameworks</li>
+                    <li>SQL, defect management, and Agile/Scrum</li>
+                </ul>
+
+                <p class="job-opening-application">
+                    Share your updated resume at
+                    <a href="mailto:nick@uniteditinc.com?subject=Senior%20QA%20Engineer%20%2F%20QA%20Lead%20Application&amp;body=Please%20include%20your%20visa%20status%20and%20current%20location.">
+                        nick@uniteditinc.com
+                    </a>.
+                    Please mention your visa status and current location.
+                </p>
+            </article>
+        </section>
+
+        <p><a class="feedback-button" href="./index.html">Back to coding practice</a></p>
+    </main>
+
+    <script>
+        (function () {
+            var themeToggle = document.getElementById("themeToggle");
+            var label = themeToggle.querySelector(".theme-toggle-label");
+
+            function setTheme(theme) {
+                var isDark = theme === "dark";
+                document.documentElement.dataset.theme = isDark ? "dark" : "light";
+                themeToggle.setAttribute("aria-pressed", String(isDark));
+                themeToggle.setAttribute(
+                    "aria-label",
+                    isDark ? "Switch to light mode" : "Switch to dark mode"
+                );
+                label.textContent = isDark ? "Light mode" : "Dark mode";
+            }
+
+            try {
+                setTheme(localStorage.getItem("preferred-theme") === "dark" ? "dark" : "light");
+            } catch (error) {
+                setTheme("light");
+                console.error("Unable to read the saved color theme.", error);
+            }
+
+            themeToggle.addEventListener("click", function () {
+                var nextTheme =
+                    document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+                setTheme(nextTheme);
+                try {
+                    localStorage.setItem("preferred-theme", nextTheme);
+                } catch (error) {
+                    console.error("Unable to save the selected color theme.", error);
+                }
+            });
+        }());
+    </script>
+</body>
+
+</html>
