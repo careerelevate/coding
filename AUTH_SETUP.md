@@ -42,8 +42,8 @@ Commit and publish the configuration. For later Apps Script code changes, create
 ## Sign-in behavior
 
 - Google sign-in verifies the Google account and adds it to `Users` the first time it is used.
-- Email sign-in uses one form: the site checks the address, sends a code for an existing account, or reveals the name field when the address is new. There is no separate “Sign in” / “Sign up” choice.
-- New accounts are saved only after the six-digit email code is verified. The `Users` row contains the email, name, provider, and enrollment date.
+- The sign-in dialog offers Google sign-in or email signup. Email signup collects a full name (4–100 characters) and email address. If the email already exists, signup is rejected with a duplicate-account message.
+- New email accounts are saved only after the six-digit verification code is entered. The `Users` row contains the email, name, provider, and enrollment date.
 - Email codes expire after 10 minutes, are limited to five attempts, and can be resent after 60 seconds.
 - Email codes are sent by the Google account that owns the Apps Script deployment, subject to Google's sending quotas.
 
@@ -51,11 +51,11 @@ Commit and publish the configuration. For later Apps Script code changes, create
 
 Use a disposable mailbox or email reflector that you can read, rather than a real user's address:
 
-1. Open the site, choose **Sign in**, then **Continue with email**, and enter the test address.
-2. When the name field appears, enter a 3–15 character test name and submit.
+1. Open the site, choose **Sign in**, then **Sign up with email**.
+2. Enter a test full name with at least four characters and the test email address.
 3. Confirm the mailbox receives a six-digit code, enter it on the site, and verify that the dialog shows the account was created.
 4. Open the spreadsheet's `Users` tab and confirm the row contains the test name, email, and enrollment date. Delete the test row when finished.
-5. After enrollment, signing in with the same address should send a new code. Calling the signup action again for that address should return the duplicate-account response.
+5. Try signing up again with the same email address and confirm the duplicate-account message appears.
 
 After editing `google-apps-script/Code.gs`, create a new deployment version from **Deploy > Manage deployments** so the `/exec` URL serves the updated code. The script posts its response to the top-level page because Apps Script renders HtmlService output inside a sandboxed wrapper. If the site stays on “Contacting the sign-in service…”, the deployed script is still the old version.
 

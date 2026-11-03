@@ -42,7 +42,6 @@
                 <div class="stat-card">
                     <span class="stat-label">Code Editor</span>
                     <strong class="stat-value">Run + AI Debugging</strong>
-                    <button class="sign-in-button" id="signInButton" type="button">Sign in</button>
                 </div>
                 <a class="stat-card stat-card-link" href="./current-openings.html">
                     <span class="stat-label">Careers</span>
@@ -52,6 +51,8 @@
             </div>
         </section>
 
+        <button class="sign-in-button" id="signInButton" type="button">Sign in</button>
+
         <dialog class="auth-dialog" id="authDialog" aria-labelledby="authDialogTitle">
             <div class="auth-dialog-header">
                 <div>
@@ -60,27 +61,27 @@
                 </div>
                 <button class="auth-close-button" id="authCloseButton" type="button" aria-label="Close sign-in dialog">&times;</button>
             </div>
-            <p class="auth-description">Sign in or create an account to continue.</p>
+            <p class="auth-description">Sign in with Google or create an account with your email.</p>
             <div class="auth-status" id="authStatus" role="status" aria-live="polite"></div>
 
             <section class="auth-methods" id="authMethods" aria-label="Choose a sign-in method">
                 <div class="google-sign-in-slot" id="googleSignInButton"></div>
                 <p class="auth-setup-note" id="googleSetupNote"></p>
                 <div class="auth-divider"><span>or</span></div>
-                <button class="auth-secondary-button" id="ownEmailButton" type="button">Continue with email</button>
+                <button class="auth-secondary-button" id="ownEmailButton" type="button">Sign up with email</button>
             </section>
 
             <form class="auth-form" id="authEmailForm" hidden novalidate>
-                <label class="auth-field" id="authNameField" hidden>
-                    <span>Name</span>
-                    <input id="authName" name="name" type="text" autocomplete="name" minlength="3" maxlength="15">
-                    <small>Use 3–15 characters.</small>
+                <label class="auth-field" id="authNameField">
+                    <span>Full name</span>
+                    <input id="authName" name="name" type="text" autocomplete="name" minlength="4" maxlength="100" required>
+                    <small>Enter at least 4 characters.</small>
                 </label>
                 <label class="auth-field">
                     <span>Email address</span>
                     <input id="authEmail" name="email" type="email" autocomplete="email" maxlength="254" required>
                 </label>
-                <button class="auth-primary-button" id="authEmailSubmit" type="submit">Continue</button>
+                <button class="auth-primary-button" id="authEmailSubmit" type="submit">Create account</button>
                 <button class="auth-back-button" id="authEmailBack" type="button">Back</button>
             </form>
 
@@ -90,7 +91,7 @@
                     <span>Verification code</span>
                     <input id="authCode" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" minlength="6" maxlength="6" required>
                 </label>
-                <button class="auth-primary-button" type="submit">Verify and sign in</button>
+                <button class="auth-primary-button" type="submit">Verify email and create account</button>
                 <button class="auth-back-button" id="authCodeBack" type="button">Back</button>
             </form>
 
@@ -99,7 +100,7 @@
                 <button class="auth-secondary-button" id="authSignOutButton" type="button">Sign out</button>
             </section>
             <p class="auth-setup-note" id="authServiceSetupNote"></p>
-            <p class="auth-privacy-note">Email sign-in uses a one-time code. New accounts are stored in the linked Google Sheet with name, email, and enrollment date.</p>
+            <p class="auth-privacy-note">Email signups are verified with a one-time code before the name and email are added to the linked Google Sheet.</p>
         </dialog>
         <iframe class="auth-response-frame" id="authResponseFrame" name="authResponseFrame" title="Sign-in response" aria-hidden="true"></iframe>
 
@@ -1199,7 +1200,10 @@ class RotateNumberRight {
         document.getElementById("authSignedInMessage").textContent =
             (accountCreated ? "Account created and signed in as " : "Signed in as ") +
             user.name + " (" + user.email + ").";
-        document.getElementById("signInButton").textContent = "Signed in";
+        var accountButton = document.getElementById("signInButton");
+        accountButton.textContent = user.name;
+        accountButton.title = "Signed in as " + user.name;
+        accountButton.setAttribute("aria-label", "Signed in as " + user.name + ". Open account details.");
         setAuthStatus("", "");
     }
 
@@ -1236,28 +1240,12 @@ class RotateNumberRight {
             document.getElementById("authDialogTitle").textContent = "Verify your email";
             setAuthStatus("", "");
             document.getElementById("authCode").focus();
-        } else if (result.status === "new-user") {
+        } else if (result.status === "duplicate") {
             authState.mode = "signup";
-            document.getElementById("authNameField").hidden = false;
-            document.getElementById("authName").required = true;
-            document.getElementById("authEmailSubmit").textContent =
-                "Create account and send code";
             showAuthView("authEmailForm");
             document.getElementById("authDialogTitle").textContent = "Create your account";
             setAuthStatus(
-                "No account was found for that email. Enter your name to create an account.",
-                ""
-            );
-            document.getElementById("authName").focus();
-        } else if (result.status === "duplicate") {
-            authState.mode = "signin";
-            document.getElementById("authNameField").hidden = true;
-            document.getElementById("authName").required = false;
-            document.getElementById("authEmailSubmit").textContent = "Continue";
-            showAuthView("authEmailForm");
-            document.getElementById("authDialogTitle").textContent = "Sign in with email";
-            setAuthStatus(
-                "That email is already registered. Click Continue to sign in.",
+                "This email address is already present. Sign in with Google or use a different email address.",
                 "error"
             );
             document.getElementById("authEmail").focus();
@@ -1282,7 +1270,7 @@ class RotateNumberRight {
         }
         if (!backendUrl && !serviceSetupNote.textContent) {
             serviceSetupNote.textContent =
-                "Email sign-in needs the Apps Script web app URL configured in auth-config.js.";
+                "Email signup needs the Apps Script web app URL configured in auth-config.js.";
         }
         if (!googleClientId) {
             setupNote.textContent =
@@ -1367,12 +1355,6 @@ class RotateNumberRight {
             dialog.showModal();
             initializeGoogleSignIn();
             setAuthStatus("", "");
-            authState.mode = "signin";
-            nameInput.required = false;
-            document.getElementById("authNameField").hidden = true;
-            nameInput.value = "";
-            emailInput.value = "";
-            document.getElementById("authEmailSubmit").textContent = "Continue";
             if (authState.user) {
                 showAuthView("authSignedIn");
                 document.getElementById("authDialogTitle").textContent = "You're signed in";
@@ -1392,25 +1374,18 @@ class RotateNumberRight {
             }
         });
         document.getElementById("ownEmailButton").addEventListener("click", function () {
-            authState.mode = "signin";
-            document.getElementById("authNameField").hidden = true;
-            nameInput.required = false;
+            authState.mode = "signup";
+            document.getElementById("authNameField").hidden = false;
+            nameInput.required = true;
             nameInput.value = "";
             emailInput.value = "";
-            document.getElementById("authEmailSubmit").textContent = "Continue";
             showAuthView("authEmailForm");
-            document.getElementById("authDialogTitle").textContent =
-                "Sign in or create an account";
-            setAuthStatus(
-                "Enter your email. We'll check whether you already have an account.",
-                ""
-            );
-            emailInput.focus();
+            document.getElementById("authDialogTitle").textContent = "Create your account";
+            setAuthStatus("", "");
+            nameInput.focus();
         });
         document.getElementById("authEmailBack").addEventListener("click", function () {
             authState.mode = "signin";
-            document.getElementById("authNameField").hidden = true;
-            nameInput.required = false;
             showAuthView("authMethods");
             document.getElementById("authDialogTitle").textContent = "Sign in";
             setAuthStatus("", "");
@@ -1423,21 +1398,18 @@ class RotateNumberRight {
                 emailInput.focus();
                 return;
             }
-            var mode = authState.mode === "signup" ? "signup" : "signin";
+            var name = nameInput.value.trim();
+            var nameLength = Array.from(name).length;
+            if (nameLength < 4 || nameLength > 100) {
+                setAuthStatus("Enter a full name between 4 and 100 characters.", "error");
+                nameInput.focus();
+                return;
+            }
             var values = {
                 email: email,
-                mode: mode
+                mode: "signup",
+                name: name
             };
-            if (mode === "signup") {
-                var name = nameInput.value.trim();
-                var nameLength = Array.from(name).length;
-                if (nameLength < 3 || nameLength > 15) {
-                    setAuthStatus("Name must be between 3 and 15 characters.", "error");
-                    nameInput.focus();
-                    return;
-                }
-                values.name = name;
-            }
             submitAuthRequest("sendCode", values);
         });
         document.getElementById("authCodeForm").addEventListener("submit", function (event) {
@@ -1454,34 +1426,25 @@ class RotateNumberRight {
             });
         });
         document.getElementById("authCodeBack").addEventListener("click", function () {
-            var isSignup = authState.mode === "signup";
-            document.getElementById("authNameField").hidden = !isSignup;
-            nameInput.required = isSignup;
-            document.getElementById("authEmailSubmit").textContent = isSignup
-                ? "Create account and send code"
-                : "Continue";
+            document.getElementById("authNameField").hidden = false;
+            nameInput.required = true;
             showAuthView("authEmailForm");
-            document.getElementById("authDialogTitle").textContent = isSignup
-                ? "Create your account"
-                : "Sign in with email";
-            setAuthStatus(
-                isSignup
-                    ? "Enter your name and email to create your account."
-                    : "Enter your email. We'll send a one-time code.",
-                ""
-            );
-            (isSignup ? nameInput : emailInput).focus();
+            document.getElementById("authDialogTitle").textContent = "Create your account";
+            setAuthStatus("", "");
+            nameInput.focus();
         });
         document.getElementById("authSignOutButton").addEventListener("click", function () {
             authState.user = null;
             authState.mode = "signin";
             authState.email = "";
-            document.getElementById("signInButton").textContent = "Sign in";
+            var accountButton = document.getElementById("signInButton");
+            accountButton.textContent = "Sign in";
+            accountButton.removeAttribute("title");
+            accountButton.setAttribute("aria-label", "Sign in");
             document.getElementById("authNameField").hidden = true;
-            nameInput.required = false;
+            nameInput.required = true;
             nameInput.value = "";
             emailInput.value = "";
-            document.getElementById("authEmailSubmit").textContent = "Continue";
             showAuthView("authMethods");
             document.getElementById("authDialogTitle").textContent = "Sign in";
             setAuthStatus("You are signed out.", "success");

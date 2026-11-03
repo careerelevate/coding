@@ -213,7 +213,15 @@ h1 {
 }
 
 .sign-in-button {
-    margin-top: 12px;
+    margin: 0;
+    max-width: calc(100vw - 170px);
+    overflow: hidden;
+    position: absolute;
+    right: 142px;
+    text-overflow: ellipsis;
+    top: 18px;
+    white-space: nowrap;
+    z-index: 2;
 }
 
 .sign-in-button:hover,
@@ -1343,6 +1351,12 @@ body,
 
     .theme-toggle {
         right: 12px;
+        top: 10px;
+    }
+
+    .sign-in-button {
+        max-width: calc(100vw - 150px);
+        right: 132px;
         top: 10px;
     }
 

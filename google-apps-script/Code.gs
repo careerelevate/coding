@@ -67,22 +67,15 @@ function sendVerificationCode_(request) {
   if (!isValidEmail_(email)) {
     throw new Error("Enter a valid email address.");
   }
-  if (mode !== "signup" && mode !== "signin") {
-    throw new Error("Choose sign in or sign up.");
+  if (mode !== "signup") {
+    throw new Error("Choose Google sign-in or email signup.");
   }
-  if (mode === "signup") {
-    var nameLength = Array.from(name).length;
-    if (nameLength < 3 || nameLength > 15) {
-      throw new Error("Name must be between 3 and 15 characters.");
-    }
-    if (findUser_(email)) {
-      return { kind: "coding-practice-auth", status: "duplicate" };
-    }
-  } else if (!findUser_(email)) {
-    return {
-      kind: "coding-practice-auth",
-      status: "new-user"
-    };
+  var nameLength = Array.from(name).length;
+  if (nameLength < 4 || nameLength > 100) {
+    throw new Error("Enter a full name between 4 and 100 characters.");
+  }
+  if (findUser_(email)) {
+    return { kind: "coding-practice-auth", status: "duplicate" };
   }
 
   var cache = CacheService.getScriptCache();
@@ -128,8 +121,8 @@ function verifyCode_(request) {
   if (!isValidEmail_(email) || !/^\d{6}$/.test(submittedCode)) {
     throw new Error("Enter the six-digit code sent to your email.");
   }
-  if (mode !== "signup" && mode !== "signin") {
-    throw new Error("Choose sign in or sign up.");
+  if (mode !== "signup") {
+    throw new Error("Email verification is only available for new account signup.");
   }
 
   var cache = CacheService.getScriptCache();
@@ -165,10 +158,6 @@ function verifyCode_(request) {
       }
       addUser_(email, codeData.name, "email");
       user = { email: email, name: codeData.name };
-    } else if (!user) {
-      cache.remove("code:" + key);
-      cache.remove("attempts:" + key);
-      return { kind: "coding-practice-auth", status: "new-user" };
     }
     cache.remove("code:" + key);
     cache.remove("attempts:" + key);
